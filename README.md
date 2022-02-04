@@ -1,1 +1,1 @@
-# HA2_GameSerrver
+# HA2_GameServer
