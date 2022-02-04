@@ -33,6 +33,8 @@ public class XiangqiGame extends Game implements Serializable{
 
 		// TODO: initialization of game state can go here
 	}
+	
+	// Test Comment
 
 	public String getType() {
 		return "xiangqi";
