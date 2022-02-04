@@ -32,6 +32,7 @@ public class XiangqiGame extends Game implements Serializable{
 		super();
 
 		// TODO: initialization of game state can go here
+		int a =1;
 	}
 	
 	// Test Comment
