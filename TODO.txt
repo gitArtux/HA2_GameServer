@@ -1,9 +1,0 @@
-Xianqigame:
-    + String Board
-
-    - constructor (set: blackPlayer / redPlayer / nextPlayer / board / started)
-    - setBoard (does not check correctness)
-    - getBoard
-
-
-    
