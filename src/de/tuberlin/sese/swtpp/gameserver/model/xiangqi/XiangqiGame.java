@@ -36,7 +36,7 @@ public class XiangqiGame extends Game implements Serializable{
 		// TODO: initialization of game state can go here
 		this.blackPlayer = getPlayers().get(0);
 		this.redPlayer   = getPlayers().get(1);
-		this.nextPlayer  = redPlayer;
+		setNextPlayer(redPlayer);
 		
 		setBoard("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR");
 		this.started     = true;
@@ -226,8 +226,20 @@ public class XiangqiGame extends Game implements Serializable{
 	@Override
 	public boolean tryMove(String moveString, Player player) {
 		// TODO: implement
-		
-		
+		if (isPlayersTurn(player)){
+			// TODO: check if Move-pattern is Correct
+			
+			
+			// Add Move to history and set next Player
+			history.add(new Move(moveString, board, player));
+			if (player == redPlayer) {
+				setNextPlayer(blackPlayer);
+			}
+			else {
+				setNextPlayer(redPlayer);
+			}
+			return true;
+		}
 		return false;
 		
 		// return True if allowed to move else False
