@@ -3,8 +3,49 @@ package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 import java.io.Serializable;
 
 public class Board implements Serializable{
+	/* THE BOARD:
+	 * 
+	 * 		Entry: [0, 0]
+	 * 			  |
+	 * 			  |	    Black
+	 * 		9  [[ r h e a g a e h r ]
+	 * 		8	[ 0 0 0 0 0 0 0 0 0 ] --- Entry: [1]
+	 * 		7	[ 0 c 0 0 0 0 0 c 0 ] 
+	 * 		6	[ s 0 s 0 s 0 s 0 s ] 
+	 * 		5	[ 0 0 0 0 0 0 0 0 0 ]
+	 * 		4	[ 0 0 0 0 0 0 0 0 0 ]
+	 * 		3	[ S 0 S 0 S 0 S 0 S ]
+	 * 		2	[ 0 C 0 0 0 0 0 C 1 ]
+	 * 		1	[ 0 0 0 0 0 0 0 0 0 ] 	
+	 * 		0	[ R H E A G A E H R ]]
+	 * 
+	 * 			  a b c d e f g h i
+	 * 					 Red
+	 * 
+	 * 
+	 */
+	
+	
 	private Figure[][] board;
 	private String boardFEN;
+	
+	public int[] translateToPos(String strpos) {
+		char[] charArrayPos = strpos.toCharArray();
+		return new int[] {9 - charArrayPos[1], Character.getNumericValue(charArrayPos[0] - 10)};
+	}
+	
+	public String getBoard() {
+		return String.copyValueOf(boardFEN.toCharArray());
+	}
+	
+	
+	public Figure getBoardEntry(int[] pos) {
+		return board[pos[0]][pos[1]];
+	}
+	
+	public void setBoardEntry(int[] pos, Figure f) {
+		board[pos[0]][pos[1]] = f;
+	}
 	
 	
 	private Figure createFigure(char c, int[] pos) {
@@ -48,20 +89,6 @@ public class Board implements Serializable{
 		default:
 			return null;
 		}
-	}
-	
-	
-	public String getBoard() {
-		return String.copyValueOf(boardFEN.toCharArray());
-	}
-	
-	
-	public Figure getBoardEntry(int[] pos) {
-		return board[pos[0]][pos[1]];
-	}
-	
-	public void setBoardEntry(int[] pos, Figure f) {
-		board[pos[0]][pos[1]] = f;
 	}
 	
 	// rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR
