@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Board implements Serializable{
 	/* THE BOARD:
 	 * 
-	 * 		Entry: [0, 0]
+	 * 		  board[0][0]
 	 * 			  |
 	 * 			  |	    Black
 	 * 		9  [[ r h e a g a e h r ]
-	 * 		8	[ 0 0 0 0 0 0 0 0 0 ] --- Entry: [1]
+	 * 		8	[ 0 0 0 0 0 0 0 0 0 ] --- board[1]
 	 * 		7	[ 0 c 0 0 0 0 0 c 0 ] 
 	 * 		6	[ s 0 s 0 s 0 s 0 s ] 
 	 * 		5	[ 0 0 0 0 0 0 0 0 0 ]
@@ -21,7 +21,6 @@ public class Board implements Serializable{
 	 * 
 	 * 			  a b c d e f g h i
 	 * 					 Red
-	 * 
 	 * 
 	 */
 	
