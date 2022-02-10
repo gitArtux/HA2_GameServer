@@ -24,7 +24,7 @@ public class XiangqiGame extends Game implements Serializable{
 	// internal representation of the game state
 	// TODO: insert additional game data here
 	
-	private String board;
+	private Board board;
 
 	/************************
 	 * constructors
@@ -38,7 +38,7 @@ public class XiangqiGame extends Game implements Serializable{
 		this.redPlayer   = getPlayers().get(1);
 		setNextPlayer(redPlayer);
 		
-		setBoard("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR");
+		board.setBoard("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR");
 		this.started     = true;
 	}
 
@@ -214,13 +214,13 @@ public class XiangqiGame extends Game implements Serializable{
 		// Note: This method is for automatic testing. A regular game would not start at some artificial state.
 		//       It can be assumed that the state supplied is a regular board that can be reached during a game.
 		// TODO: implement
-		this.board = state;
+		board.setBoard(state);;
 	}
 
 	@Override
 	public String getBoard() {
 		// TODO: implement
-		return this.board;
+		return board.getBoard();
 	}
 
 	@Override
@@ -231,7 +231,7 @@ public class XiangqiGame extends Game implements Serializable{
 			
 			
 			// Add Move to history and set next Player
-			history.add(new Move(moveString, board, player));
+			history.add(new Move(moveString, board.getBoard(), player));
 			if (player == redPlayer) {
 				setNextPlayer(blackPlayer);
 			}
