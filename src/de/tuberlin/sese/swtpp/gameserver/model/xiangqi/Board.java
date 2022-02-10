@@ -6,9 +6,6 @@ public class Board implements Serializable{
 	private Figure[][] board;
 	private String boardFEN;
 	
-	public Board(String boardFEN) {
-		setBoard(boardFEN);
-	}
 	
 	private Figure createFigure(char c, int[] pos) {
 		if (Character.isUpperCase(c)){
@@ -79,10 +76,10 @@ public class Board implements Serializable{
 			int col = 0;
 			 for(int i = 0; i<strline.length(); i++) {
 				 char c = strline.charAt(i);
-				 
+
 				 // case Digit
 			     if (Character.isDigit(c)) {
-			    	 for (int t = 0; t<Character.valueOf(c); t++) {
+			    	 for (int t = 0; t<Character.getNumericValue(c); t++) {
 			    		 board[row][col] = null;
 			    		 col ++;
 			    	 }
@@ -92,6 +89,7 @@ public class Board implements Serializable{
 			     else {
 			    	 board[row][col] = createFigure(c, new int[] {row, col});
 			    	 col++;
+			    	 
 			     }
 			 }
 		}

@@ -34,12 +34,10 @@ public class XiangqiGame extends Game implements Serializable{
 		super();
 
 		// TODO: initialization of game state can go here
-		this.blackPlayer = getPlayers().get(0);
-		this.redPlayer   = getPlayers().get(1);
-		setNextPlayer(redPlayer);
+		board = new Board();
+		board.setBoard("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR");		
 		
-		board.setBoard("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR");
-		this.started     = true;
+		//started     = true;
 	}
 
 	public String getType() {
@@ -221,6 +219,7 @@ public class XiangqiGame extends Game implements Serializable{
 	public String getBoard() {
 		// TODO: implement
 		return board.getBoard();
+		//return "rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR";
 	}
 
 	@Override
