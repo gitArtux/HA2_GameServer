@@ -26,18 +26,52 @@ public class Board implements Serializable{
 	
 	
 	private Figure[][] board;
-	private String boardFEN;
 	
-	public int[] translateToPos(String strpos) {
-		char[] charArrayPos = strpos.toCharArray();
+	
+	// translates strPos to LogicPos for Example "a9" --> new int[] {0, 0}
+	public int[] translateToPos(String strPos) {
+		char[] charArrayPos = strPos.toCharArray();
 		return new int[] {9 - charArrayPos[1], Character.getNumericValue(charArrayPos[0] - 10)};
 	}
 	
+	
+	// get boardFEN
 	public String getBoard() {
-		return String.copyValueOf(boardFEN.toCharArray());
+		String boardFEN="";
+		int count = 0;
+		
+		for (int row=0; row<10; row++) {
+			for (int col=0; col<9; col++) {
+				
+				//  null
+				if (board[row][col]==null) {
+					count++;
+					if (col==8) {
+						boardFEN += Character.forDigit(count, 10);
+						count = 0;
+					}
+				}
+				
+				// Figure
+				else {
+					if (count!=0){
+						boardFEN += Character.forDigit(count, 10);
+						count=0;
+					}
+					boardFEN += board[row][col].getRepr();
+				}
+			}
+			
+			// end of row
+			if (row!=9) {
+				boardFEN+='/';
+			}
+		}
+		return boardFEN;
+		
 	}
 	
-	
+	// get & set boardEntry at Pos
 	public Figure getBoardEntry(int[] pos) {
 		return board[pos[0]][pos[1]];
 	}
@@ -46,7 +80,7 @@ public class Board implements Serializable{
 		board[pos[0]][pos[1]] = f;
 	}
 	
-	
+	// for setBoard()
 	private Figure createFigure(char c, int[] pos) {
 		if (Character.isUpperCase(c)){
 			switch(c) {
@@ -90,11 +124,12 @@ public class Board implements Serializable{
 		}
 	}
 	
-	// rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR
+	// setBoard
 	public void setBoard(String boardFEN) {
-		this.boardFEN=String.copyValueOf(boardFEN.toCharArray());
+		
+		// board
 		String[] lines = boardFEN.split("/", 0);	
-		// TODO: check validity // Exeptionhandling
+		// TODO: check validity / Exeptionhandling
 		
 		board = new Figure[10][9];
 		for (int row=0;row<10;row++) {
