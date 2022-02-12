@@ -211,24 +211,38 @@ public class XiangqiGame extends Game implements Serializable{
 	public void setBoard(String state) {
 		// Note: This method is for automatic testing. A regular game would not start at some artificial state.
 		//       It can be assumed that the state supplied is a regular board that can be reached during a game.
-		// TODO: implement
 		board.setBoard(state);;
 	}
 
 	@Override
 	public String getBoard() {
-		// TODO: implement
 		return board.getBoard();
 		//return "rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR";
 	}
 
 	@Override
 	public boolean tryMove(String moveString, Player player) {
-		// TODO: implement
 		if (isPlayersTurn(player)){
-			// TODO: check if Move-pattern is Correct
+			String[] moveArr = moveString.split("-");
 			
+			// check if Move-pattern is Correct
+			if (moveArr.length!=2) {
+				return false;
+			}
+			for(String strPos: moveArr) {
+				if (!(strPos.length()!=2 || !"abcdefghi".contains(String.valueOf(strPos.charAt(0))) || !"0123456789".contains(String.valueOf(strPos.charAt(1))))) {
+					return false;
+				}
+			}			
 			
+			// heck if logical Move is correct
+			Figure f = board.getBoardEntry(board.translateToPos(moveArr[0]));
+			if (f==null) {
+				return false;
+			}
+			
+			f.tryMove(board.translateToPos(moveArr[1]));
+				
 			// Add Move to history and set next Player
 			history.add(new Move(moveString, board.getBoard(), player));
 			if (player == redPlayer) {

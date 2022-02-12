@@ -26,7 +26,7 @@ public class Board implements Serializable{
 	
 	
 	private Figure[][] board;
-	
+
 	
 	// translates strPos to LogicPos for Example "a9" --> new int[] {0, 0}
 	public int[] translateToPos(String strPos) {
@@ -51,6 +51,7 @@ public class Board implements Serializable{
 						count = 0;
 					}
 				}
+
 				
 				// Figure
 				else {
@@ -82,46 +83,32 @@ public class Board implements Serializable{
 	
 	// for setBoard()
 	private Figure createFigure(char c, int[] pos) {
-		if (Character.isUpperCase(c)){
-			switch(c) {
-			case 'S':
-				return new Soldier(pos, true, c);
-			case 'A':
-				return new Advisor(pos, true, c);
-			case 'E':
-				return new Elephant(pos, true, c);
-			case 'H':
-				return new Horse(pos, true, c);
-			case 'R':
-				return new Rook(pos, true, c);
-			case 'C':
-				return new Cannon(pos, true, c);
-			case 'G':
-				return new General(pos, true, c);
-			}
-		}
+		Figure f = null;
+		boolean color = false;
+		char repr = c;
 		
-		switch(c) {
-		case 's':
-			return new Soldier(pos, false, c);
-		case 'a':
-			return new Advisor(pos, false, c);
-		case 'e':
-			return new Elephant(pos, false, c);
-		case 'h':
-			return new Horse(pos, false, c);
-		case 'r':
-			return new Rook(pos, false, c);
-		case 'c':
-			return new Cannon(pos, false, c);
-		case 'g':
-			return new General(pos, false, c);
-			
-		// always return
-		// TODO: Exeption Handling
-		default:
-			return null;
+		if (Character.isLowerCase(c)){
+
+			c = Character.toUpperCase(c);
+			color = true;
 		}
+		switch(c) {
+		case 'S':
+			f = new Soldier(pos, color, repr);
+		case 'A':
+			f = new Advisor(pos, color, repr);
+		case 'E':
+			f = new Elephant(pos, color, repr);
+		case 'H':
+			f = new Horse(pos, color, repr);
+		case 'R':
+			f = new Rook(pos, color, repr);
+		case 'C':
+			f = new Cannon(pos, color, repr);
+		case 'G':
+			f = new General(pos, color, repr);
+		}
+		return f;
 	}
 	
 	// setBoard
@@ -135,24 +122,23 @@ public class Board implements Serializable{
 		for (int row=0;row<10;row++) {
 			String strline = lines[row];
 			int col = 0;
-			 for(int i = 0; i<strline.length(); i++) {
-				 char c = strline.charAt(i);
-
+			for(int i = 0; i<strline.length(); i++) {
+				char c = strline.charAt(i);
+	
 				 // case Digit
-			     if (Character.isDigit(c)) {
-			    	 for (int t = 0; t<Character.getNumericValue(c); t++) {
-			    		 board[row][col] = null;
-			    		 col ++;
-			    	 }
-			     }
+			    if (!Character.isDigit(c)) {
+			    	board[row][col] = createFigure(c, new int[] {row, col});
+			    	col++;
+			    	continue;
+			    	
+			    }
 			     
 			     // case Figure
-			     else {
-			    	 board[row][col] = createFigure(c, new int[] {row, col});
-			    	 col++;
-			    	 
-			     }
-			 }
+			    for (int t = 0; t<Character.getNumericValue(c); t++) {
+		    		board[row][col] = null;
+		    		col ++;
+		    	}
+			}
 		}
 	}
 }

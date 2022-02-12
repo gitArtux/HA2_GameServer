@@ -7,9 +7,9 @@ public class Cannon extends Figure implements Serializable {
 	public Cannon(int[] pos, boolean color, char repr) {
 		super(pos, color, repr);
 	}
-
+	
 	@Override
-	public boolean tryMove() {
+	public boolean tryMove(int[] square) {
 		// TODO Auto-generated method stub
 		return false;
 	}

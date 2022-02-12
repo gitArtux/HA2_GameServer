@@ -6,7 +6,7 @@ public abstract class Figure implements Serializable {
 	protected int[] pos; 			// row, col
 	protected boolean color; 		// red = false, black = true
 	protected char repr;
-
+	
 	public Figure(int[] pos, boolean color, char repr) {
 		setPosition(pos);
 		setColor(color);
@@ -37,6 +37,7 @@ public abstract class Figure implements Serializable {
 		return repr;
 	}
 	
-	public abstract boolean tryMove();
+	
+	public abstract boolean tryMove(int[] square);
 
 }

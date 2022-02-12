@@ -9,7 +9,7 @@ public class Rook extends Figure implements Serializable {
 	}
 
 	@Override
-	public boolean tryMove() {
+	public boolean tryMove(int[] square) {
 		// TODO Auto-generated method stub
 		return false;
 	}
