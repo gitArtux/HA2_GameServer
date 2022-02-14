@@ -14,10 +14,5 @@ public class Advisor extends Figure implements Serializable {
 		return false;
 	}
 	
-	public boolean givesCheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-		
 
 }

@@ -6,7 +6,7 @@ public class Horse extends Figure implements Serializable {
 
 	public Horse(int[] pos, boolean color, char repr) {
 		super(pos, color, repr);
-		addToCheckable();
+		//addToCheckable();
 	}
 	
 	@Override
@@ -15,11 +15,7 @@ public class Horse extends Figure implements Serializable {
 		return false;
 	}
 	
-	public boolean givesCheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-		
+
 
 
 }

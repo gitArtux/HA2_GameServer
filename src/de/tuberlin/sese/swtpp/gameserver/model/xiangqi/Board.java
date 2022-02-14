@@ -1,6 +1,8 @@
 package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Board implements Serializable{
 	/* THE BOARD:
@@ -26,6 +28,8 @@ public class Board implements Serializable{
 	
 	
 	private Figure[][] board;
+
+	
 
 	
 	// translates strPos to LogicPos for Example "a9" --> new int[] {0, 0}
@@ -122,6 +126,7 @@ public class Board implements Serializable{
 		// TODO: check validity / Exeptionhandling
 		
 		board = new Figure[10][9];
+		
 		for (int row=0;row<10;row++) {
 			String strline = lines[row];
 			int col = 0;
