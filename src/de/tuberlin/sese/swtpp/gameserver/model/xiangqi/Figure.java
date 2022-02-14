@@ -8,6 +8,7 @@ public abstract class Figure implements Serializable{
 	protected int[] pos; 			// row, col
 	protected boolean color; 		// red = false, black = true
 	protected char repr;
+	private int test;
 
 	
 
