@@ -44,21 +44,24 @@ public class Board implements Serializable{
 			for (int col=0; col<9; col++) {
 				
 				//  null
-				if (board[row][col]==null) {
+				if (board[row][col]==null && col==8) {	
+					boardFEN += Character.forDigit(count+1, 10);
+					count = 0;
+					
+				}
+				
+				else if (board[row][col]==null){
 					count++;
-					if (col==8) {
-						boardFEN += Character.forDigit(count, 10);
-						count = 0;
-					}
 				}
 
 				
 				// Figure
+				else if (count!=0) {
+					boardFEN += Character.forDigit(count, 10);
+					count=0;
+					boardFEN += board[row][col].getRepr();
+				}
 				else {
-					if (count!=0){
-						boardFEN += Character.forDigit(count, 10);
-						count=0;
-					}
 					boardFEN += board[row][col].getRepr();
 				}
 			}
