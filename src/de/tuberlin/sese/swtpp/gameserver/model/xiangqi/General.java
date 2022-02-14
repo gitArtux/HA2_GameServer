@@ -6,6 +6,7 @@ public class General extends Figure implements Serializable {
 	
 	public General(int[] pos, boolean color, char repr) {
 		super(pos, color, repr);
+		addToCheckable();
 	}
 	
 	@Override
@@ -13,6 +14,12 @@ public class General extends Figure implements Serializable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public boolean givesCheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+		
 
 	
 }

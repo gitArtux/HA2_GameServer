@@ -6,6 +6,7 @@ public class Cannon extends Figure implements Serializable {
 
 	public Cannon(int[] pos, boolean color, char repr) {
 		super(pos, color, repr);
+		addToCheckable();
 	}
 	
 	@Override
@@ -14,5 +15,10 @@ public class Cannon extends Figure implements Serializable {
 		return false;
 	}
 
+	public boolean givesCheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+		
 
 }

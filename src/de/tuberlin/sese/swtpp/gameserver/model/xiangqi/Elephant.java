@@ -14,5 +14,10 @@ public class Elephant extends Figure implements Serializable {
 		return false;
 	}
 
+	public boolean givesCheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+		
 
 }
