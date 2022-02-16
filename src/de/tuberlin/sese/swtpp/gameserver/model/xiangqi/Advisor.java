@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Advisor extends Figure implements Serializable {
 	
-	public Advisor(int[] pos, boolean color, char repr) {
-		super(pos, color, repr);
+	public Advisor(int[] pos, boolean color, char repr, Board board) {
+		super(pos, color, repr, board);
 	}
 	
 	public boolean possibleMoves(int[] square, boolean color) { // not Finished
@@ -29,6 +29,12 @@ public class Advisor extends Figure implements Serializable {
 		
 		return false;
 		
+	}
+	
+	@Override
+	public  boolean givesCheck() {
+		// TODO:
+		return false;
 	}
 	
 

@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Cannon extends Figure implements Serializable {
 
-	public Cannon(int[] pos, boolean color, char repr) {
-		super(pos, color, repr);
-		//addToCheckable();
+	public Cannon(int[] pos, boolean color, char repr, Board board) {
+		super(pos, color, repr, board);
+		addToCheckable();
 	}
 	
 	@Override
@@ -19,6 +19,11 @@ public class Cannon extends Figure implements Serializable {
 		return false;
 	}
 
+	@Override
+	public  boolean givesCheck() {
+		// TODO:
+		return false;
+	}
 
 		
 

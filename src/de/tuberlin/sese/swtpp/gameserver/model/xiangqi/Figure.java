@@ -5,21 +5,26 @@ import java.io.Serializable;
 
 
 public abstract class Figure implements Serializable{
+	
+	private static final long serialVersionUID = -2084306411289420422L;
+	
+	
 	protected int[] pos; 			// row, col
 	protected boolean color; 		// red = false, black = true
 	protected char repr;
+	protected Board board;
 
 	
 
 	
-	public Figure(int[] pos, boolean color, char repr) {
+	public Figure(int[] pos, boolean color, char repr, Board board) {
 		setPosition(pos);
 		setColor(color);
 		setRepr(repr);
-		//setBoard(board);
+		setBoard(board);
 		
 	}
-	/*
+	
 	protected void setBoard(Board board) {
 		this.board=board;
 	}
@@ -41,7 +46,7 @@ public abstract class Figure implements Serializable{
 			board.redFigsCheckable.remove(this);
 		}
 	}
-	*/
+
 	
 	public void setPosition(int[] pos) {
 		this.pos = pos.clone();
@@ -125,6 +130,8 @@ public abstract class Figure implements Serializable{
 	// PUNI END
 	
 	public abstract boolean tryMove(int[] square);
+	
+	public abstract boolean givesCheck();
 	
 	
 

@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 public class General extends Figure implements Serializable {
 	
-	public General(int[] pos, boolean color, char repr) {
-		super(pos, color, repr);
-		//addToCheckable();
+	private static final long serialVersionUID = 3589471797532078075L;
+	
+	public General(int[] pos, boolean color, char repr, Board board) {
+		super(pos, color, repr, board);
+		addToCheckable();
 	}
 	
 	@Override
@@ -23,6 +25,12 @@ public class General extends Figure implements Serializable {
 		
 		return false;
 		
+	}
+	
+	@Override
+	public  boolean givesCheck() {
+		// TODO:
+		return false;
 	}
 	
 

@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Board implements Serializable{
+	
+	private static final long serialVersionUID = -2496645958349826119L;
+	
 	/* THE BOARD:
 	 * 
 	 * 		  board[0][0]
@@ -28,7 +31,9 @@ public class Board implements Serializable{
 	
 	
 	private Figure[][] board;
-
+	
+	public List<Figure> blackFigsCheckable = new LinkedList<>();
+	public List<Figure> redFigsCheckable = new LinkedList<>();
 	
 
 	
@@ -101,19 +106,19 @@ public class Board implements Serializable{
 		}
 		switch(c) {
 		case 'S':
-			f = new Soldier(pos, color, repr);
+			f = new Soldier(pos, color, repr, this);
 		case 'A':
-			f = new Advisor(pos, color, repr);
+			f = new Advisor(pos, color, repr, this);
 		case 'E':
-			f = new Elephant(pos, color, repr);
+			f = new Elephant(pos, color, repr, this);
 		case 'H':
-			f = new Horse(pos, color, repr);
+			f = new Horse(pos, color, repr, this);
 		case 'R':
-			f = new Rook(pos, color, repr);
+			f = new Rook(pos, color, repr, this);
 		case 'C':
-			f = new Cannon(pos, color, repr);
+			f = new Cannon(pos, color, repr, this);
 		case 'G':
-			f = new General(pos, color, repr);
+			f = new General(pos, color, repr, this);
 		}
 		return f;
 	}
