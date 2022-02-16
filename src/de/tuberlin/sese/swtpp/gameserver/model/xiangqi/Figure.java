@@ -67,6 +67,62 @@ public abstract class Figure implements Serializable{
 		return repr;
 	}
 	
+	// PUNI Begin
+	
+	public boolean outOfBoard(int[] square) {
+		
+		// Primitiven Datentypen (z.B. int) haben kein null => muss man nicht checken
+		
+		if(square[0] < 0 || square[0] > 9) {
+			return true;
+		}
+		
+		if(square[1] < 0 || square[1] > 8) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean outOfRiver(int[] square, boolean color) {
+		
+		if(color) {
+			if(square[0] >= 5){
+			return true;
+			}
+		}
+			
+		if(!color) {
+			if(square[0] <= 4){
+				return true;
+			}
+		}
+			
+			return false;
+				
+	}   
+		
+		public boolean inPalace(int[] square, boolean color) {
+			
+			if(color) {
+				if(square[0] >= 0 && square[0] <= 2 &&
+						square[1] >= 3 && square[1] <= 5){
+				return true;
+				}
+			}
+				
+			if(!color) {
+				if(square[0] >= 7 && square[0] <= 9 &&
+						square[1] >= 3 && square[1] <= 5){
+				return true;
+				}
+			}
+				
+				return false;
+					
+		}   	
+	
+	// PUNI END
 	
 	public abstract boolean tryMove(int[] square);
 	

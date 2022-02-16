@@ -10,9 +10,19 @@ public class General extends Figure implements Serializable {
 	}
 	
 	@Override
-	public boolean tryMove(int[] square) {
+	public boolean tryMove(int[] square) { // red = false, black = true; red beginnt & ist unten
 		// TODO Auto-generated method stub
+		
+		if(outOfBoard(square)) {
+			return false;
+		}
+		
+		if (!(inPalace(square, this.getColor()))) {
+			return false;
+		}
+		
 		return false;
+		
 	}
 	
 

@@ -10,7 +10,15 @@ public class Elephant extends Figure implements Serializable {
 	
 	@Override
 	public boolean tryMove(int[] square) {
-		// TODO Auto-generated method stub
+		
+		if(outOfBoard(square)) {
+			return false;
+		}
+		
+		if (outOfRiver(square, this.getColor())) {
+			return false;
+		}
+		
 		return false;
 	}
 

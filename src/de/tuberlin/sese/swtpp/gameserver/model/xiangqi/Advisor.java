@@ -7,11 +7,28 @@ public class Advisor extends Figure implements Serializable {
 	public Advisor(int[] pos, boolean color, char repr) {
 		super(pos, color, repr);
 	}
+	
+	public boolean possibleMoves(int[] square, boolean color) { // not Finished
+		// switch
+		
+		return false;
+	}
 
 	@Override
 	public boolean tryMove(int[] square) {
-		// TODO Auto-generated method stub
+		
+		if(outOfBoard(square)) {
+			return false;
+		}
+		
+		if (!(inPalace(square, this.getColor()))) {
+			return false;
+		}
+		
+
+		
 		return false;
+		
 	}
 	
 
