@@ -106,26 +106,23 @@ public abstract class Figure implements Serializable{
 			return false;
 				
 	}   
+	
+	public boolean sameColor(int[] square) {
+		if(board.getBoardEntry(square).getColor() == this.getColor()) {
+			return true;
+		}
 		
-		public boolean inPalace(int[] square, boolean color) {
-			
-			if(color) {
-				if(square[0] >= 0 && square[0] <= 2 &&
-						square[1] >= 3 && square[1] <= 5){
-				return true;
-				}
-			}
-				
-			if(!color) {
-				if(square[0] >= 7 && square[0] <= 9 &&
-						square[1] >= 3 && square[1] <= 5){
-				return true;
-				}
-			}
-				
-				return false;
-					
-		}   	
+		return false;
+	}
+	
+	public boolean isEmpty(int[] square) {
+		if(board.getBoardEntry(square) == null) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	
 	// PUNI END
 	

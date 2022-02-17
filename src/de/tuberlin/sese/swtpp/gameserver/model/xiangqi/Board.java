@@ -89,6 +89,14 @@ public class Board implements Serializable{
 		return board[pos[0]][pos[1]];
 	}
 	
+	// PUNI Begin 
+	
+	public Figure getBoardEntry(int a, int b) { // Overloading sicherheitshalber, falls man's braucht
+		return board[a][b];
+	}
+	
+	// PUNI END
+	
 	public void setBoardEntry(int[] pos, Figure f) {
 		board[pos[0]][pos[1]] = f;
 	}
@@ -145,7 +153,7 @@ public class Board implements Serializable{
 			    	continue;
 			    	
 			    }
-			     
+			       
 			     // case Figure
 			    for (int t = 0; t<Character.getNumericValue(c); t++) {
 		    		board[row][col] = null;
