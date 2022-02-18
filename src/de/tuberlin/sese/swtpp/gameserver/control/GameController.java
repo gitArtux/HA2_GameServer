@@ -1,3 +1,5 @@
+hello
+
 package de.tuberlin.sese.swtpp.gameserver.control;
 
 import de.tuberlin.sese.swtpp.gameserver.model.Game;
