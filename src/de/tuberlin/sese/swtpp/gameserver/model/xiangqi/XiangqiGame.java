@@ -225,26 +225,24 @@ public class XiangqiGame extends Game implements Serializable{
 		if (isPlayersTurn(player)){
 			String[] moveArr = moveString.split("-");
 			
-			/* 
-			 * // check if MoveStringPattern is Correct
-			*  if (moveArr.length!=2) {
-			*   	return false;
-			*	}
-			*	for(String strPos: moveArr) {
-			*		if (!(strPos.length()!=2 || !"abcdefghi".contains(String.valueOf(strPos.charAt(0))) || !"0123456789".contains(String.valueOf(strPos.charAt(1))))) {
-			*			return false;
-			*		}
-			*	}
-			*/
+			
+			// check if MoveStringPattern is Correct
+			if (moveArr.length!=2) {
+			  	return false;
+			}
+			for(String strPos: moveArr) {
+				if (!(strPos.length()!=2 || !"abcdefghi".contains(String.valueOf(strPos.charAt(0))) || !"0123456789".contains(String.valueOf(strPos.charAt(1))))) {
+					return false;
+				}
+			}
+			
 				
 				
 			
 			// heck if logical Move is correct
 			Figure f = board.getBoardEntry(board.translateToPos(moveArr[0]));
-			if (f==null) {
-				return false;
-			}
-			if (f.tryMove(board.translateToPos(moveArr[1]))) {
+			
+			if (f!=null && f.tryMove(board.translateToPos(moveArr[1]))) {
 				// Add Move to history and set next Player
 				history.add(new Move(moveString, board.getBoard(), player));
 				if (player == redPlayer) {
@@ -254,11 +252,9 @@ public class XiangqiGame extends Game implements Serializable{
 					setNextPlayer(redPlayer);
 				}
 				return true;	
-			}		
+			}
+					
 		}
 		return false;
-		
-		// return True if allowed to move else False
 	}
-
 }
