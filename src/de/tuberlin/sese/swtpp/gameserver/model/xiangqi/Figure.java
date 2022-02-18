@@ -8,6 +8,7 @@ public abstract class Figure implements Serializable{
 	
 	private static final long serialVersionUID = -2084306411289420422L;
 	
+	//test
 	
 	protected int[] pos; 			// row, col
 	protected boolean color; 		// red = false, black = true
