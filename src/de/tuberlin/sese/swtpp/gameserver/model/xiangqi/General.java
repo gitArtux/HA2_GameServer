@@ -68,23 +68,27 @@ public class General extends Figure implements Serializable {
 		
 		int a[] = {this.getPostion()[0], this.getPostion()[1]}; 
 		
-		if(possibleMove(square, a)) {
+		if (!possibleMove(square, a)) {
+			return false;
+		}
 			
-			if(this.isEmpty(square)) {
-				return true;
-			}
-			
+		if(!this.isEmpty(square)) {
 			if(this.sameColor(square)) {
 				return false;
 			}
-			
 		}
-		return false;
+			
+		
+		this.setPosition(square);
+		
+		// givesCheck()
+		
+		return true;
 		
 	}
 	
 	@Override
-	public  boolean givesCheck() {
+	public  boolean givesCheck() { // General hat Deathstare als givesCheck
 		// TODO:
 		return false;
 	}

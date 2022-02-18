@@ -62,15 +62,17 @@ public class Advisor extends Figure implements Serializable {
 			return false;
 		}
 		
-		if(this.isEmpty(square)) {
-			return true;
+		if(!this.isEmpty(square)) {
+			if(this.sameColor(square)) {
+				return false;
+			}
 		}
 			
-		if(!this.sameColor(square)) {
-			return true;
-		}
+		this.setPosition(square);
 		
-		return false;
+		// givesCheck()
+		
+		return true;
 		
 	}
 	
