@@ -57,7 +57,8 @@ public class General extends Figure implements Serializable {
 	
 	@Override
 	public boolean tryMove(int[] square) { // red = false, black = true; red beginnt & ist unten
-	
+		
+		
 		if(outOfBoard(square)) { // Checkt ob square[] im Board ist & nicht OutOfBounds
 			return false;
 		}
@@ -80,6 +81,7 @@ public class General extends Figure implements Serializable {
 			
 		
 		this.setPosition(square);
+
 		
 		// givesCheck()
 		

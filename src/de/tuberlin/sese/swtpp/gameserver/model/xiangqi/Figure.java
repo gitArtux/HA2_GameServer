@@ -18,7 +18,7 @@ public abstract class Figure implements Serializable{
 
 	
 	public Figure(int[] pos, boolean color, char repr, Board board) {
-		setPosition(pos);
+		this.pos=pos;
 		setColor(color);
 		setRepr(repr);
 		setBoard(board);
@@ -27,6 +27,10 @@ public abstract class Figure implements Serializable{
 	
 	protected void setBoard(Board board) {
 		this.board=board;
+	}
+	
+	protected Board getBoard() {
+		return board;
 	}
 	
 	protected void addToCheckable() {
@@ -49,7 +53,9 @@ public abstract class Figure implements Serializable{
 
 	
 	public void setPosition(int[] pos) {
+		getBoard().setBoardEntry(this.pos, null);
 		this.pos = pos.clone();
+		getBoard().setBoardEntry(this.pos, this);
 	}
 	
 	public int[] getPostion() {

@@ -40,7 +40,7 @@ public class Board implements Serializable{
 	// translates strPos to LogicPos for Example "a9" --> new int[] {0, 0}
 	public int[] translateToPos(String strPos) {
 		char[] charArrayPos = strPos.toCharArray();
-		return new int[] {9 - charArrayPos[1], Character.getNumericValue(charArrayPos[0] - 10)};
+		return new int[] {9-Character.getNumericValue(charArrayPos[1]), Character.getNumericValue(charArrayPos[0])-10};
 	}
 	
 	
@@ -89,13 +89,7 @@ public class Board implements Serializable{
 		return board[pos[0]][pos[1]];
 	}
 	
-	// PUNI Begin 
-	
-	public Figure getBoardEntry(int a, int b) { // Overloading sicherheitshalber, falls man's braucht
-		return board[a][b];
-	}
-	
-	// PUNI END
+
 	
 	public void setBoardEntry(int[] pos, Figure f) {
 		board[pos[0]][pos[1]] = f;
