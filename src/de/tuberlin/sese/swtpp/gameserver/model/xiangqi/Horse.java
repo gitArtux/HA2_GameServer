@@ -9,19 +9,89 @@ public class Horse extends Figure implements Serializable {
 		addToCheckable();
 	}
 	
-	@Override
-	public boolean tryMove(int[] square) {
-
-		if(outOfBoard(square)) {
-			return false;
+	public boolean possibleMove(int[] square, int[] a) {
+		
+		if(square[0] == a[0]-2 || square[0] == a[0]+2){
+			if(square[1] == a[1]-1 || square[1] == a[1]+1) {
+				return true;
+			}
+		}
+		
+		if(square[1] == a[1]-2 || square[1] == a[1]+2){
+			if(square[0] == a[0]-1 || square[0] == a[0]+1) {
+				return true;
+			}
 		}
 		
 		return false;
 	}
 	
+	public boolean reachable(int[] square, int[] a) {
+		
+		int[] crossThrough = {-96, -96};	
+		
+		if(square[0] == a[0]-2) {
+			crossThrough[0] = a[0]-1;
+			crossThrough[1] = a[1];
+		}else if(square[0] == a[0]+2) {
+			crossThrough[0] = a[0]+1;
+			crossThrough[1] = a[1];
+		}else if(square[1] == a[1]-2) {
+			crossThrough[1] = a[0];
+			crossThrough[1] = a[1]-1;
+		}else if(square[1] == a[1]+2) {
+			crossThrough[1] = a[0];
+			crossThrough[1] = a[1]+1;
+		}else {
+			return false;
+		}
+		
+		return this.isEmpty(crossThrough);
+
+	}
+	
+	
+	@Override
+	public boolean tryMove(int[] square) {
+		
+		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
+		
+		if(outOfBoard(square)) {
+			return false;
+		}
+		
+		if(!possibleMove(square, backUpPos)) {
+			return false;
+		}
+		
+		if(!reachable(square, backUpPos)) {
+			return false;
+		}
+		
+		// Nur da zum testen, NICHT FINAL
+				if(!this.isEmpty(square)) {
+					if(this.sameColor(square)) {
+						return false;
+					}else {
+						board.getBoardEntry(square).removeFromCheckable();
+					}
+				}
+					
+				this.setPosition(square); // Muss bearbeitet werden
+				
+				return true;
+		//
+				
+	}
+	
 	@Override
 	public  boolean givesCheck() {
-		// TODO:
+		if(!this.outOfRiver(this.getPostion(), this.getColor())){
+			return false;
+		}
+		
+		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
+		
 		return false;
 	}
 	

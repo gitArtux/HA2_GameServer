@@ -50,6 +50,10 @@ public class Advisor extends Figure implements Serializable {
 	@Override
 	public boolean tryMove(int[] square) {
 		
+		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
+		
+		System.out.println(this.getRepr() + " ruft tryMove() grad");
+		
 		if(outOfBoard(square)) {
 			return false;
 		}
@@ -68,11 +72,19 @@ public class Advisor extends Figure implements Serializable {
 			}
 		}
 			
-		this.setPosition(square);
-		
-		// givesCheck()
-		
-		return true;
+		// Nur da zum testen, NICHT FINAL
+				if(!this.isEmpty(square)) {
+					if(this.sameColor(square)) {
+						return false;
+					}else {
+						board.getBoardEntry(square).removeFromCheckable();
+					}
+				}
+					
+				this.setPosition(square); // Muss bearbeitet werden
+				
+				return true;
+		//
 		
 	}
 	

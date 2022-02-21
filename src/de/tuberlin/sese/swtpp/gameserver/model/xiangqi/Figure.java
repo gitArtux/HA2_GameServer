@@ -130,6 +130,39 @@ public abstract class Figure implements Serializable{
 	}
 	
 	
+	public boolean isGeneral(int[] square, boolean color) {
+		if(board.getBoardEntry(square).getRepr() == 'g' && color) {
+			return true;
+		}
+		if(board.getBoardEntry(square).getRepr() == 'G' && !color) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	public boolean isBGeneral(int[] square) {
+		if(board.getBoardEntry(square).getRepr() == 'g') {
+			return true;
+		}
+		
+		return false;
+	}
+		
+	public boolean isRGeneral(int[] square) {
+		if(board.getBoardEntry(square).getRepr() == 'G') {
+				return true;
+		}
+		
+		return false;
+	}
+	
+	
+	public boolean isCheck(int[] square, boolean color) { // Muss die Liste durchgehen
+		return false;
+	}
+	
 	// PUNI END
 	
 	public abstract boolean tryMove(int[] square);

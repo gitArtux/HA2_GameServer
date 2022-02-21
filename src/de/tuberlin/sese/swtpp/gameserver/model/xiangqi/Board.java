@@ -89,8 +89,6 @@ public class Board implements Serializable{
 		return board[pos[0]][pos[1]];
 	}
 	
-
-	
 	public void setBoardEntry(int[] pos, Figure f) {
 		board[pos[0]][pos[1]] = f;
 	}
