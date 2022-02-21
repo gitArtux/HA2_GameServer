@@ -34,20 +34,20 @@ public abstract class Figure implements Serializable{
 	}
 	
 	protected void addToCheckable() {
-		if(color) {
-			board.blackFigsCheckable.add(this);
+		if(!color) {
+			board.redFigsCheckable.add(this);
 		}
 		else {
-			board.redFigsCheckable.add(this);
+			board.blackFigsCheckable.add(this);
 		}
 	}
 	
 	public void removeFromCheckable() {
-		if(color) {
-			board.blackFigsCheckable.remove(this);
+		if(!color) {
+			board.redFigsCheckable.remove(this);
 		}
 		else {
-			board.redFigsCheckable.remove(this);
+			board.blackFigsCheckable.remove(this);
 		}
 	}
 

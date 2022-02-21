@@ -247,8 +247,8 @@ public class XiangqiGame extends Game implements Serializable{
 			
 			// heck if logical Move is correct
 			Figure f = board.getBoardEntry(board.translateToPos(moveArr[0]));
-
-			if (f!=null && f.tryMove(board.translateToPos(moveArr[1]))) {
+			
+			if (f!=null && f.tryMove(board.translateToPos(moveArr[1])) && !((player==redPlayer && f.getColor()) || (player==blackPlayer && !f.getColor()))) {
 				// Add Move to history and set next Player
 				history.add(new Move(moveString, board.getBoard(), player));
 				if (player == redPlayer) {
@@ -257,12 +257,10 @@ public class XiangqiGame extends Game implements Serializable{
 				else {
 					setNextPlayer(redPlayer);
 				}
-				System.out.println(board.getBoard());
 				return true;	
 			}
 					
 		}
-		System.out.println(board.getBoard());
 		return false;
 	}
 }
