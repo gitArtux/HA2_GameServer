@@ -18,23 +18,26 @@ public class General extends Figure implements Serializable {
 	
 		
 	public boolean inPalace(int[] square, boolean color) {	
+			
 		if(color) {
 			int[] a = {0, 2};
 			return palaceCalc(a, square);
-		}else {
+		}else{
 			int[] a = {7, 9};
 			return palaceCalc(a, square);
-		}		
+		}
+		
 	}   
 		
 	boolean palaceCalc(int[] a, int[] square) {
+		
 		if(square[0] >= a[0] && square[0] <= a[1] &&
 				square[1] >= 3 && square[1] <= 5){
 					return true;
+			}
+			
+			return false;
 		}
-		
-		return false;
-	}
 	
 	public boolean possibleMove(int[] square, int[] a) {
 		
@@ -45,32 +48,39 @@ public class General extends Figure implements Serializable {
 				square[0] == a[0] 	&& square[1] == a[1]+1	
 				||
 				square[0] == a[0] 	&& square[1] == a[1]-1){
+			
 			return true;
 		}
 		
 		return false;
 	}
 	
+	public boolean flags(int[] square, int[] a, boolean color) {
+		
+		if(outOfBoard(square)) { 
+			return true;
+		}
+		
+		if (!(inPalace(square, color ))) {
+			return true;
+		}
+		
+		if (!possibleMove(square, a)) {
+			return true;
+		}
+		
+		return false;
+	}
 	
 	@Override
-	public boolean tryMove(int[] square) { // red = false, black = true; red beginnt & ist unten
-
-		System.out.println(this.getRepr() + " ruft tryMove() grad");
-		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
-		// Figure backUp0 = board.getBoardEntry(square); // Wie save ich die Figur?
+	public boolean tryMove(int[] square) { 
 		
-		if(outOfBoard(square)) {
+		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]}; 
+		
+		if(flags(square, backUpPos, this.getColor())) {
 			return false;
 		}
 		
-		if (!(inPalace(square, this.getColor()))) { 
-			return false;
-		}
-		
-		if (!possibleMove(square, backUpPos)) {
-			return false;
-		}
-			
 		// Nur da zum testen, NICHT FINAL
 				if(!this.isEmpty(square)) {
 					if(this.sameColor(square)) {
@@ -96,7 +106,6 @@ public class General extends Figure implements Serializable {
 					return false;
 				}
 			}
-			
 		}
 		return false;
 	}
@@ -112,23 +121,23 @@ public class General extends Figure implements Serializable {
 			}
 		}
 		return false;
-	}	
-		
+	}
+	
 	@Override
 	public  boolean givesCheck() { // General hat Deathstare als givesCheck
-		
 		if(color){
 			if(blackDeathStare()) {
 				return true;
 			}
-		
 		} else {
-			if(redDeathStare()) {
-				return true;
+				if(redDeathStare()) {
+					return true;
+				}
 			}
-		}	
-	
+			
 		return false;
 	}
+		
+
 	
 }
