@@ -42,20 +42,32 @@ public class Elephant extends Figure implements Serializable {
 		
 	}
 	
+	public boolean flags(int[] square, int[] a, boolean color) {
+		if(outOfBoard(square)) {
+			return true;
+		}
+		
+		if (outOfRiver(square, color)) {
+			return true;
+		}
+		
+		if(!possibleMove(square, a)) {
+			return true;
+		}
+		
+		if(!reachable(square, a)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public boolean tryMove(int[] square) {
 		
 		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
 		
-		if(outOfBoard(square)) {
-			return false;
-		}
-		
-		if (outOfRiver(square, this.getColor())) {
-			return false;
-		}
-		
-		if(!possibleMove(square, backUpPos)) {
+		if(flags(square, backUpPos, this.getColor())) {
 			return false;
 		}
 		

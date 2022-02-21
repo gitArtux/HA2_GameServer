@@ -9,6 +9,11 @@ public class General extends Figure implements Serializable {
 	public General(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
 		addToCheckable();
+		if(color) {
+			board.blackGeneral = this;
+		} else {
+			board.redGeneral = this;
+		}
 	}
 	
 		
@@ -85,7 +90,7 @@ public class General extends Figure implements Serializable {
 	public boolean blackDeathStare() {
 		for(int[] i = {this.getPostion()[0], this.getPostion()[1]}; i[0] < 9; ++i[0]) {
 			if(!this.isEmpty(i)) {
-				if(this.isRGeneral(i)) {
+				if(this.isEnemyGeneral(i, this.getColor())) {
 					return true;
 				} else {
 					return false;
@@ -99,7 +104,7 @@ public class General extends Figure implements Serializable {
 	public boolean redDeathStare() {
 		for(int[] i = {this.getPostion()[0], this.getPostion()[1]}; 0 < i[0]; --i[0]) {
 			if(!this.isEmpty(i)) {
-				if(this.isBGeneral(i)) {
+				if(this.isEnemyGeneral(i, this.getColor())) {
 					return true;
 				} else {
 					return false;

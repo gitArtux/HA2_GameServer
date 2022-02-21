@@ -50,23 +50,31 @@ public class Horse extends Figure implements Serializable {
 
 	}
 	
+	public boolean flags(int[] square, int[] a) {
+		if(outOfBoard(square)) {
+			return true;
+		}
+		
+		if(!possibleMove(square, a)) {
+			return true;
+		}
+		
+		if(!reachable(square, a)) {
+			return true;
+		}
+		
+		return false;
+	}
 	
 	@Override
 	public boolean tryMove(int[] square) {
 		
 		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
 		
-		if(outOfBoard(square)) {
+		if(flags(square, backUpPos)) {
 			return false;
 		}
 		
-		if(!possibleMove(square, backUpPos)) {
-			return false;
-		}
-		
-		if(!reachable(square, backUpPos)) {
-			return false;
-		}
 		
 		// Nur da zum testen, NICHT FINAL
 				if(!this.isEmpty(square)) {
@@ -90,7 +98,11 @@ public class Horse extends Figure implements Serializable {
 			return false;
 		}
 		
-		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
+		if(possibleMove(this.getEnemyGeneralPos(this.getColor()), this.getPostion())) {
+			if(reachable(this.getEnemyGeneralPos(this.getColor()), this.getPostion())) {
+				return true;
+			}
+		}
 		
 		return false;
 	}

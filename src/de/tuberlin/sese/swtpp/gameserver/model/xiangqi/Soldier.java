@@ -76,9 +76,7 @@ public class Soldier extends Figure implements Serializable {
 			return false;
 		}
 		
-		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
-		
-		return false;
+		return possibleMove(this.getEnemyGeneralPos(this.getColor()), this.getPostion(), this.getColor());
 	}
 
 

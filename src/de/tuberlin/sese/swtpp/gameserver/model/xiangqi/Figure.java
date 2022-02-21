@@ -1,6 +1,7 @@
 package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 
@@ -129,35 +130,23 @@ public abstract class Figure implements Serializable{
 		return false;
 	}
 	
-	
-	public boolean isGeneral(int[] square, boolean color) {
-		if(board.getBoardEntry(square).getRepr() == 'g' && color) {
+	public boolean isEnemyGeneral(int[] square, boolean c) {
+		if(board.getBoardEntry(square).getRepr() == 'g' && !c) {
 			return true;
 		}
-		if(board.getBoardEntry(square).getRepr() == 'G' && !color) {
+		if(board.getBoardEntry(square).getRepr() == 'G' && c) {
 			return true;
 		}
 		return false;
 	}
 	
-	
-	
-	public boolean isBGeneral(int[] square) {
-		if(board.getBoardEntry(square).getRepr() == 'g') {
-			return true;
+	public int[] getEnemyGeneralPos(boolean color) {
+		if(color) {
+			return board.redGeneral.getPostion();
+		} else {
+			return board.blackGeneral.getPostion();
 		}
-		
-		return false;
 	}
-		
-	public boolean isRGeneral(int[] square) {
-		if(board.getBoardEntry(square).getRepr() == 'G') {
-				return true;
-		}
-		
-		return false;
-	}
-	
 	
 	public boolean isCheck(int[] square, boolean color) { // Muss die Liste durchgehen
 		return false;

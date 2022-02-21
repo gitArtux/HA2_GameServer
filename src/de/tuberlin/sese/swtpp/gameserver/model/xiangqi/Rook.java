@@ -9,6 +9,33 @@ public class Rook extends Figure implements Serializable {
 		addToCheckable();
 	}
 
+	public boolean possibleMove(int[] square, int[] a) {
+		
+		
+		return false;
+	}
+	
+	public boolean reachable(int[] square, int[] a) {
+		
+		return false;
+	}
+	
+	public boolean flags(int[] square, int[] a) {
+		if(outOfBoard(square)) {
+			return true;
+		}
+		
+		if(!possibleMove(square, a)) {
+			return true;
+		}
+		
+		if(!reachable(square, a)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public boolean tryMove(int[] square) {
 
@@ -16,7 +43,22 @@ public class Rook extends Figure implements Serializable {
 			return false;
 		}
 		
-		return false;
+		
+		
+		// Nur da zum testen, NICHT FINAL
+		if(!this.isEmpty(square)) {
+			if(this.sameColor(square)) {
+				return false;
+			}else {
+				board.getBoardEntry(square).removeFromCheckable();
+			}
+		}
+			
+		this.setPosition(square); // Muss bearbeitet werden
+		
+		return true;
+		//
+		
 	}
 	
 	@Override

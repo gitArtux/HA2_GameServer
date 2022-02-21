@@ -34,6 +34,8 @@ public class Board implements Serializable{
 	
 	public List<Figure> blackFigsCheckable = new LinkedList<>();
 	public List<Figure> redFigsCheckable = new LinkedList<>();
+	public Figure blackGeneral;
+	public Figure redGeneral;
 	
 
 	
