@@ -167,6 +167,7 @@ public class TryMoveIntegrationTest {
 	    assertMove("e3-e4",true,true);
 	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
 	}
+	 
 
 	    
 	    

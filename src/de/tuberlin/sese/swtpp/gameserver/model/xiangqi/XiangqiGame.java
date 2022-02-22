@@ -223,9 +223,6 @@ public class XiangqiGame extends Game implements Serializable{
 
 	@Override
 	public boolean tryMove(String moveString, Player player) {
-		
-		
-		
 		if (isPlayersTurn(player)){
 			String[] moveArr = moveString.split("-");
 			
@@ -234,7 +231,6 @@ public class XiangqiGame extends Game implements Serializable{
 			  	return false;
 			}
 			
-
 			
 			for(String strPos: moveArr) {
 				
@@ -244,11 +240,13 @@ public class XiangqiGame extends Game implements Serializable{
 					return false;
 				}
 			}
-			
-			// heck if logical Move is correct
+			// check if logical Move is correct
 			Figure f = board.getBoardEntry(board.translateToPos(moveArr[0]));
+			System.out.println(f.getPostion()[0]);
+			System.out.println(f.getPostion()[1]);
 			
-			if (f!=null && f.tryMove(board.translateToPos(moveArr[1])) && !((player==redPlayer && f.getColor()) || (player==blackPlayer && !f.getColor()))) {
+			if (f!=null && f.tryMove(board.translateToPos(moveArr[1]))) {
+				
 				// Add Move to history and set next Player
 				history.add(new Move(moveString, board.getBoard(), player));
 				if (player == redPlayer) {

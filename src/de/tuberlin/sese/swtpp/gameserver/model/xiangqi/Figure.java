@@ -9,7 +9,7 @@ public abstract class Figure implements Serializable{
 	
 	private static final long serialVersionUID = -2084306411289420422L;
 	
-	
+	protected boolean checkable=true;
 	protected int[] pos; 			// row, col
 	protected boolean color; 		// red = false, black = true
 	protected char repr;
@@ -79,6 +79,17 @@ public abstract class Figure implements Serializable{
 		return repr;
 	}
 	
+	protected void removeFromList() { // this
+		if(checkable && color) { //black
+			getBoard().blackFigsCheckable.remove(this);
+		}
+		else if(checkable && !color){
+			getBoard().redFigsCheckable.remove(this);
+		}
+	}
+	
+	
+	
 	// PUNI Begin
 	
 	
@@ -134,13 +145,41 @@ public abstract class Figure implements Serializable{
 		}
 	}
 	
-	public boolean isCheck(int[] square, boolean color) { // Muss die Liste durchgehen
+	protected boolean helperIsCheck() {
+		if (color) { // black
+			for (Figure f: getBoard().blackFigsCheckable) {
+				if (f.givesCheck()) {
+					return true;
+				}
+			}
+		} 
+		else {
+			for (Figure f: getBoard().blackFigsCheckable) {
+				if (f.givesCheck()) {
+					return true;
+				}
+			}
+		}
 		return false;
+	}
+	
+	public boolean isCheck(Figure f, int[] backupPosition) { // 
+		if (helperIsCheck()) {
+			setPosition(backupPosition);
+			f.setPosition(getPostion());
+			return false;
+		}
+		else {
+			f.removeFromList();
+			return true;
+		}
+		
 	}
 	
 	// PUNI END
 	
 	public abstract boolean tryMove(int[] square);
+	
 	
 	public abstract boolean givesCheck();
 	

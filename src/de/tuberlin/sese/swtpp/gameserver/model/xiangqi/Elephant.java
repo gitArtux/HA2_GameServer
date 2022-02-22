@@ -8,6 +8,7 @@ public class Elephant extends Figure implements Serializable {
 	
 	public Elephant(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
+		checkable=false;
 	}
 	
 	public boolean possibleMove(int[] square, int[] a) {

@@ -68,8 +68,8 @@ public class General extends Figure implements Serializable {
 	}
 	
 	@Override
-	public boolean tryMove(int[] square) { 
-		
+	public boolean tryMove(int[] square) {  
+		System.out.println("general test");
 		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]}; 
 		
 		if(flags(square, backUpPos, this.getColor())) {

@@ -4,105 +4,56 @@ import java.io.Serializable;
 
 public class Advisor extends Figure implements Serializable {
 	
+	private static final long serialVersionUID = 3589471797532078076L;
+	
+	private int topB;
+	private int botB;
+	private int leftB = 4;
+	private int rightB = 6;
+	
 	public Advisor(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
+		checkable=false;
+		if (color) { //black
+			topB=0;
+			botB=2;
+		}
+		else {
+			topB=7;
+			botB=9;
+		}
 	}
 	
-		
-	public boolean inPalace(int[] square, boolean color) {
-		
-		if(color) {
-			int[] a = {0, 2, 1};
-			return palaceCalc(a, square);	
-		}	
-		if(!color) {
-			int[] a = {7, 9, 8};
-			return palaceCalc(a, square);
-		}
-			
-			return false;	
-	}   	
-	
-	boolean palaceCalc(int[] a, int[] square) {
-		if((square[0] == a[0] && square[1]  == (3^5))
-				||
-			(square[0] == a[1] && square[1]  == (3^5))
-				||
-			square[0] == a[2] && square[1] == 4){
-			return true;
-		}
-		
-		return false;
-	}
-		
-	public boolean possibleMove(int[] square) { // not Finished
-		
-		if(this.getPostion()[1] != 4) {
-			if(square[1] != 4) {
-				return false;
-			}
-		}
-			
-			return true;
-		
+	public boolean test() {
+		return true;
 	}
 	
-	public boolean flags(int[] square, boolean color) {
-		
-		
-		if (!(inPalace(square, color))) {
-			return true;
-		}
-		
-		if (!possibleMove(square)) {
-			return true;
-		}
-		
-		return false;
-	}
-
 	@Override
 	public boolean tryMove(int[] square) {
 		
-		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
-		
-		if(flags(square, this.getColor())) {
-            return false;
-        }
-		
-		
-		if (!(inPalace(square, this.getColor()))) {
+		int backUpPos[] = {getPostion()[0], getPostion()[1]};
+		Figure f = board.getBoardEntry(square);
+		if (f!=null && f.getColor()==getColor()) {
 			return false;
 		}
 		
-		if (!possibleMove(square)) {
-			return false;
-		}
-		
-		if(!this.isEmpty(square)) {
-			if(this.sameColor(square)) {
-				return false;
+		//--TO CHANGE -------
+		if ((square[0]<=botB && square[0]>=topB) && (square[1]<=rightB && square[1]>=leftB)) {
+			if ((square[0]-1==getPostion()[0] || square[0]+1==getPostion()[0])&&(square[1]-1==getPostion()[1] || square[1]+1==getPostion()[1])) {
+				setPosition(square);
+				
 			}
 		}
-			
-		// Nur da zum testen, NICHT FINAL
-				if(!this.isEmpty(square)) {
-					if(this.sameColor(square)) {
-						return false;
-					}else {
-						board.getBoardEntry(square).removeFromCheckable();
-					}
-				}
-					
-				this.setPosition(square); // Muss bearbeitet werden
-				
-				return true;
-		//
+		//--TO CHANGE -------
 		
+		
+		return isCheck(f, backUpPos);
 	}
 	
+	
+	
 	@Override
-	public  boolean givesCheck() {
+	public boolean givesCheck() {
 		// TODO:
 		return false;
 	}

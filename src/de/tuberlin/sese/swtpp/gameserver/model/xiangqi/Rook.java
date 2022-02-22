@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Rook extends Figure implements Serializable {
 	
+	private static final long serialVersionUID = -8473244559854737517L;
+	
 	public Rook(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
 		addToCheckable();
