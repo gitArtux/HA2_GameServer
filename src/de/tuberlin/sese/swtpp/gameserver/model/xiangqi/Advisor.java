@@ -24,9 +24,6 @@ public class Advisor extends Figure implements Serializable {
 		}
 	}
 	
-	public boolean test() {
-		return true;
-	}
 	
 	@Override
 	public boolean tryMove(int[] square) {
