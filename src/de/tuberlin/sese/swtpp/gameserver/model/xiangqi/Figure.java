@@ -145,6 +145,8 @@ public abstract class Figure implements Serializable{
 		}
 	}
 	
+	// PUNI END
+	
 	protected boolean helperIsCheck() {
 		if (color) { // black
 			for (Figure f: getBoard().blackFigsCheckable) {
@@ -176,9 +178,21 @@ public abstract class Figure implements Serializable{
 		
 	}
 	
-	// PUNI END
 	
-	public abstract boolean tryMove(int[] square);
+	public boolean tryMove(int[] square) {
+		int backUpPos[] = {getPostion()[0], getPostion()[1]};
+		Figure f = board.getBoardEntry(square);
+		if (f!=null && f.getColor()==getColor()) {
+			return false;
+		}
+		if(reachable(square)) {
+			setPosition(square);
+		}
+		return isCheck(f, backUpPos);
+	}
+	
+
+	protected abstract boolean reachable(int[] square);
 	
 	
 	public abstract boolean givesCheck();

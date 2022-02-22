@@ -24,29 +24,15 @@ public class Advisor extends Figure implements Serializable {
 		}
 	}
 	
-	
-	@Override
-	public boolean tryMove(int[] square) {
-		
-		int backUpPos[] = {getPostion()[0], getPostion()[1]};
-		Figure f = board.getBoardEntry(square);
-		if (f!=null && f.getColor()==getColor()) {
-			return false;
-		}
-		
-		//--TO CHANGE -------
+	@Override 
+	public boolean reachable(int[] square) {
 		if ((square[0]<=botB && square[0]>=topB) && (square[1]<=rightB && square[1]>=leftB)) {
 			if ((square[0]-1==getPostion()[0] || square[0]+1==getPostion()[0])&&(square[1]-1==getPostion()[1] || square[1]+1==getPostion()[1])) {
-				setPosition(square);
-				
+				return true;
 			}
 		}
-		//--TO CHANGE -------
-		
-		
-		return isCheck(f, backUpPos);
+		return false;
 	}
-	
 	
 	
 	@Override
