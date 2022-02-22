@@ -56,11 +56,6 @@ public class General extends Figure implements Serializable {
 	}
 	
 	public boolean flags(int[] square, int[] a, boolean color) {
-		
-		if(outOfBoard(square)) { 
-			return true;
-		}
-		
 		if (!(inPalace(square, color ))) {
 			return true;
 		}

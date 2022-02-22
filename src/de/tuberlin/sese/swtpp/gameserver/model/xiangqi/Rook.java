@@ -70,6 +70,31 @@ public class Rook extends Figure implements Serializable {
 	}
 	
 	public boolean reachable(int[] square, int[] a) {
+
+        if(closeRange(square, a)) {
+            return true;
+        }
+
+        if(square[0] != a[0]) {
+            if(square[0] > a[0]) {
+                return verticalRange(square, a, true);
+            }else {
+                return verticalRange(square, a, false);
+            }
+        } else if(square[1] != a[1]) {
+            if(square[1] > a[1]) {
+                return  horizontalRange(square, a, true);
+            }else {
+                return  horizontalRange(square, a, false);
+            }
+        }
+
+        return false;
+    }
+
+
+	public boolean flags(int[] square, int[] a) {
+
 		
 		if(closeRange(square, a)) {
 			return true;
@@ -92,25 +117,18 @@ public class Rook extends Figure implements Serializable {
 		return false;
 	}
 	
-	public boolean flags(int[] square, int[] a) {
-		
-		if(outOfBoard(square)) {
-			return true;
-		}
-		
-		return false;
-	}
+
 	
 	@Override
 	public boolean tryMove(int[] square) {
+
 
 		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
 		
 		if(flags(square, backUpPos)) {
 			return false;
 		}
-		
-		
+
 		
 		
 		

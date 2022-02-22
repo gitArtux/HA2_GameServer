@@ -46,12 +46,9 @@ public class Advisor extends Figure implements Serializable {
 			return true;
 		
 	}
-
+	
 	public boolean flags(int[] square, boolean color) {
 		
-		if(outOfBoard(square)) {
-			return true;
-		}
 		
 		if (!(inPalace(square, color))) {
 			return true;
@@ -63,16 +60,31 @@ public class Advisor extends Figure implements Serializable {
 		
 		return false;
 	}
-	
+
 	@Override
 	public boolean tryMove(int[] square) {
 		
 		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
 		
 		if(flags(square, this.getColor())) {
+            return false;
+        }
+		
+		
+		if (!(inPalace(square, this.getColor()))) {
 			return false;
 		}
 		
+		if (!possibleMove(square)) {
+			return false;
+		}
+		
+		if(!this.isEmpty(square)) {
+			if(this.sameColor(square)) {
+				return false;
+			}
+		}
+			
 		// Nur da zum testen, NICHT FINAL
 				if(!this.isEmpty(square)) {
 					if(this.sameColor(square)) {

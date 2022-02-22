@@ -81,20 +81,6 @@ public abstract class Figure implements Serializable{
 	
 	// PUNI Begin
 	
-	public boolean outOfBoard(int[] square) {
-		
-		// Primitiven Datentypen (z.B. int) haben kein null => muss man nicht checken
-		
-		if(square[0] < 0 || square[0] > 9) {
-			return true;
-		}
-		
-		if(square[1] < 0 || square[1] > 8) {
-			return true;
-		}
-		
-		return false;
-	}
 	
 	public boolean outOfRiver(int[] square, boolean color) {
 		

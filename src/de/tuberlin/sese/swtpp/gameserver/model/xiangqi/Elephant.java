@@ -43,10 +43,6 @@ public class Elephant extends Figure implements Serializable {
 	}
 	
 	public boolean flags(int[] square, int[] a, boolean color) {
-		if(outOfBoard(square)) {
-			return true;
-		}
-		
 		if (outOfRiver(square, color)) {
 			return true;
 		}

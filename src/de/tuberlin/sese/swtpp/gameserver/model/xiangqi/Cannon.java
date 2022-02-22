@@ -11,11 +11,6 @@ public class Cannon extends Figure implements Serializable {
 	
 	@Override
 	public boolean tryMove(int[] square) {
-
-		if(outOfBoard(square)) {
-			return false;
-		}
-		
 		return false;
 	}
 

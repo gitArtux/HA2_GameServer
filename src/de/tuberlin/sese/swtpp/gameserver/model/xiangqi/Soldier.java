@@ -38,10 +38,6 @@ public class Soldier extends Figure implements Serializable {
 		
 		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
 		
-		if(outOfBoard(square)) {
-			return false;
-		}
-		
 		if(!possibleMove(square, backUpPos, color)) {
 			return false;
 		}

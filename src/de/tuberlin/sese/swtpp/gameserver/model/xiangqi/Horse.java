@@ -50,11 +50,7 @@ public class Horse extends Figure implements Serializable {
 
 	}
 	
-	public boolean flags(int[] square, int[] a) {
-		if(outOfBoard(square)) {
-			return true;
-		}
-		
+	public boolean flags(int[] square, int[] a) {		
 		if(!possibleMove(square, a)) {
 			return true;
 		}
