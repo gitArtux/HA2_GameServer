@@ -11,152 +11,39 @@ public class Rook extends Figure implements Serializable {
 		addToCheckable();
 	}
 
-	public boolean possibleMove(int[] square, int[] a) {
-		
-		if(square[0] != a[0] && square[1] == a[1]){
-				return true;
-		}
-		
-		if(square[0] == a[0] && square[1] != a[1]){
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public boolean verticalRange(int[] square, int[] a, boolean forward) {
-		
-		if(forward) {
-			for(; square[0] > a[0]; ++square[0]) {
-				if(!this.isEmpty(square)) {
-					return false;
-				}
-			}
-		}else {
-			for(; square[0] < a[0]; --square[0]) {
-				if(!this.isEmpty(square)) {
+	@Override
+	public boolean reachable(int[] square) {
+		if (square[0]<getPosition()[0] && square[1]==getPosition()[1]) {
+			for (int x = getPosition()[0]; x==square[0]; x--) {
+				if(board.getBoardEntry(new int[] {x, getPosition()[1]})!=null) {
 					return false;
 				}
 			}
 		}
-		
-		return true;
-	}
-	
-	public boolean horizontalRange(int[] square, int[] a, boolean forward) {
-		
-		if(forward) {
-			for(; square[1] < a[1]; ++square[0]) {
-				if(!this.isEmpty(square)) {
-					return false;
-				}
-			}
-		}else {
-			for(; square[1] > a[1]; --square[0]) {
-				if(!this.isEmpty(square)) {
+		else if (square[0]>getPosition()[0] && square[1]==getPosition()[1]){
+			for (int x = getPosition()[0]; x==square[0]; x++) {
+				if(board.getBoardEntry(new int[] {x, getPosition()[1]})!=null) {
 					return false;
 				}
 			}
 		}
-		
-		return true;
-	}
-	
-	public boolean closeRange(int[] square, int[] a) {
-		if((square[0] == a[0]+1) ^ (square[1] == a[1]+1) ^ 
-				(square[0] == a[0]-1) ^ (square[1] == a[1]-1) ){
-			return true;
-		} else {
+		else if (square[1]<getPosition()[1] && square[0]==getPosition()[0]) {
+			for (int x = getPosition()[1]; x==square[1]; x--) {
+				if(board.getBoardEntry(new int[] {getPosition()[0], x})!=null) {
+					return false;
+				}
+			}
+		}
+		else if (square[1]>getPosition()[1] && square[0]==getPosition()[0]) {
+			for (int x = getPosition()[1]; x==square[1]; x++) {
+				if(board.getBoardEntry(new int[] {getPosition()[0], x})!=null) {
+					return false;
+				}
+			}
+		}
+		else {
 			return false;
 		}
-	}
-	
-	public boolean reachable(int[] square, int[] a) {
-
-        if(closeRange(square, a)) {
-            return true;
-        }
-
-        if(square[0] != a[0]) {
-            if(square[0] > a[0]) {
-                return verticalRange(square, a, true);
-            }else {
-                return verticalRange(square, a, false);
-            }
-        } else if(square[1] != a[1]) {
-            if(square[1] > a[1]) {
-                return  horizontalRange(square, a, true);
-            }else {
-                return  horizontalRange(square, a, false);
-            }
-        }
-
-        return false;
-    }
-
-
-	public boolean flags(int[] square, int[] a) {
-
-		
-		if(closeRange(square, a)) {
-			return true;
-		}
-		
-		if(square[0] != a[0]) {
-			if(square[0] > a[0]) {
-				return verticalRange(square, a, true);
-			}else {
-				return verticalRange(square, a, false);
-			}	
-		} else if(square[1] != a[1]) {
-			if(square[1] > a[1]) {
-				return  horizontalRange(square, a, true);
-			}else {
-				return  horizontalRange(square, a, false);
-			}
-		}
-		
-		return false;
-	}
-	
-
-	
-	@Override
-	public boolean tryMove(int[] square) {
-
-
-		int backUpPos[] = {this.getPostion()[0], this.getPostion()[1]};
-		
-		if(flags(square, backUpPos)) {
-			return false;
-		}
-
-		
-		
-		
-		// Nur da zum testen, NICHT FINAL
-		if(!this.isEmpty(square)) {
-			if(this.sameColor(square)) {
-				return false;
-			}else {
-				board.getBoardEntry(square).removeFromCheckable();
-			}
-		}
-			
-		this.setPosition(square); // Muss bearbeitet werden
-		
 		return true;
-		//
-		
 	}
-	
-	@Override
-	public  boolean givesCheck() {
-		// TODO:
-		return false;
-	}
-	
-
-
-
 }
