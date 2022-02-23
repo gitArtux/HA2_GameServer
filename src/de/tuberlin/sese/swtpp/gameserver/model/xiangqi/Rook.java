@@ -11,39 +11,40 @@ public class Rook extends Figure implements Serializable {
 		addToCheckable();
 	}
 
+	private boolean canMoveVertical(int from, int to) {
+		for (int y = from; y==to; y++) {
+			if(board.getBoardEntry(new int[] {y, getPosition()[1]})!=null) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private boolean canMoveHorizontal(int from, int to) {
+		for (int x = from; x==to; x++) {
+			if(board.getBoardEntry(new int[] {getPosition()[1], x})!=null) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	@Override
 	public boolean reachable(int[] square) {
 		if (square[0]<getPosition()[0] && square[1]==getPosition()[1]) {
-			for (int x = getPosition()[0]; x==square[0]; x--) {
-				if(board.getBoardEntry(new int[] {x, getPosition()[1]})!=null) {
-					return false;
-				}
-			}
+			return canMoveVertical(square[0], getPosition()[0]);
 		}
 		else if (square[0]>getPosition()[0] && square[1]==getPosition()[1]){
-			for (int x = getPosition()[0]; x==square[0]; x++) {
-				if(board.getBoardEntry(new int[] {x, getPosition()[1]})!=null) {
-					return false;
-				}
-			}
+			return canMoveVertical(getPosition()[0], square[0]);
 		}
 		else if (square[1]<getPosition()[1] && square[0]==getPosition()[0]) {
-			for (int x = getPosition()[1]; x==square[1]; x--) {
-				if(board.getBoardEntry(new int[] {getPosition()[0], x})!=null) {
-					return false;
-				}
-			}
+			return canMoveHorizontal(square[1], getPosition()[1]);
 		}
 		else if (square[1]>getPosition()[1] && square[0]==getPosition()[0]) {
-			for (int x = getPosition()[1]; x==square[1]; x++) {
-				if(board.getBoardEntry(new int[] {getPosition()[0], x})!=null) {
-					return false;
-				}
-			}
+			return canMoveHorizontal( getPosition()[1], square[1]);
 		}
 		else {
 			return false;
 		}
-		return true;
 	}
 }
