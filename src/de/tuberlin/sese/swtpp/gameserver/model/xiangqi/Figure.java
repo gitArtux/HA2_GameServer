@@ -59,7 +59,7 @@ public abstract class Figure implements Serializable{
 		getBoard().setBoardEntry(this.pos, this);
 	}
 	
-	public int[] getPostion() {
+	public int[] getPosition() {
 		return pos.clone();
 	}
 	
@@ -137,27 +137,20 @@ public abstract class Figure implements Serializable{
 		return false;
 	}
 	
-	public int[] getEnemyGeneralPos(boolean color) {
-		if(color) {
-			return board.redGeneral.getPostion();
-		} else {
-			return board.blackGeneral.getPostion();
-		}
-	}
 	
 	// PUNI END
 	
 	protected boolean helperIsCheck() {
 		if (color) { // black
-			for (Figure f: getBoard().blackFigsCheckable) {
-				if (f.givesCheck()) {
+			for (Figure f: getBoard().redFigsCheckable) {
+				if (f.reachable(board.blackGeneral.getPosition())) {
 					return true;
 				}
 			}
 		} 
 		else {
 			for (Figure f: getBoard().blackFigsCheckable) {
-				if (f.givesCheck()) {
+				if (f.reachable(board.redGeneral.getPosition())) {
 					return true;
 				}
 			}
@@ -168,7 +161,7 @@ public abstract class Figure implements Serializable{
 	public boolean isCheck(Figure f, int[] backupPosition) { // 
 		if (helperIsCheck()) {
 			setPosition(backupPosition);
-			f.setPosition(getPostion());
+			f.setPosition(getPosition());
 			return false;
 		}
 		else {
@@ -180,7 +173,7 @@ public abstract class Figure implements Serializable{
 	
 	
 	public boolean tryMove(int[] square) {
-		int backUpPos[] = {getPostion()[0], getPostion()[1]};
+		int backUpPos[] = {getPosition()[0], getPosition()[1]};
 		Figure f = board.getBoardEntry(square);
 		if (f!=null && f.getColor()==getColor()) {
 			return false;
@@ -192,11 +185,6 @@ public abstract class Figure implements Serializable{
 	}
 	
 
-	protected abstract boolean reachable(int[] square);
-	
-	
-	public abstract boolean givesCheck();
-	
-	
+	protected abstract boolean reachable(int[] square);	
 
 }
