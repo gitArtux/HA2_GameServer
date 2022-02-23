@@ -19,6 +19,7 @@ public class Elephant extends Figure implements Serializable {
 	
 	@Override
 	public boolean reachable(int[] square) {
+		System.out.println("Elephant");
 		if (square[0]<=botB && square[0] >= topB && Math.abs(square[0]-getPosition()[0])==2 && Math.abs(square[1]-getPosition()[1])==2
 		&& ((square[0]<getPosition()[0] && square[1]<getPosition()[1] && board.getBoardEntry(new int[] {getPosition()[0]-1, getPosition()[1]-1})==null)
 		|| (square[0]>getPosition()[0] && square[1]<getPosition()[1] && board.getBoardEntry(new int[] {getPosition()[0]+1, getPosition()[1]-1})==null)

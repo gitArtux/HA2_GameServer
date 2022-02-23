@@ -26,6 +26,7 @@ public class Advisor extends Figure implements Serializable {
 	
 	@Override 
 	public boolean reachable(int[] square) {
+		System.out.println("Advisor");
 		if ((square[0]<=botB && square[0]>=topB) && (square[1]<=rightB && square[1]>=leftB)&&
 		((square[0]-1==getPosition()[0] || square[0]+1==getPosition()[0])&&(square[1]-1==getPosition()[1] || square[1]+1==getPosition()[1]))) {
 			return true;

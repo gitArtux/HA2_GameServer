@@ -3,6 +3,8 @@ package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 import java.io.Serializable;
 
 public class Cannon extends Figure implements Serializable {
+	
+	private static final long serialVersionUID = 4132731319741905868L;
 
 	public Cannon(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
@@ -43,6 +45,7 @@ public class Cannon extends Figure implements Serializable {
 	
 	@Override
 	public boolean reachable(int[] square) {
+		System.out.println("Cannon");
 		if (square[0]<getPosition()[0] && square[1]==getPosition()[1]) {
 			return canMoveVertical(square[0], getPosition()[0]);
 		}

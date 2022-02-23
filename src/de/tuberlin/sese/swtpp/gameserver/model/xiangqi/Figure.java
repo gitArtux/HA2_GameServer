@@ -15,14 +15,12 @@ public abstract class Figure implements Serializable{
 	protected char repr;
 	protected Board board;
 
-	
-
-	
 	public Figure(int[] pos, boolean color, char repr, Board board) {
 		this.pos=pos;
 		setColor(color);
 		setRepr(repr);
 		setBoard(board);
+		System.out.println("Type: "+this.getClass().getName()); 
 		
 	}
 	
@@ -88,59 +86,8 @@ public abstract class Figure implements Serializable{
 		}
 	}
 	
-	
-	
-	// PUNI Begin
-	
-	
-	public boolean outOfRiver(int[] square, boolean color) {
-		
-		if(color) {
-			if(square[0] >= 5){
-			return true;
-			}
-		}
-			
-		if(!color) {
-			if(square[0] <= 4){
-				return true;
-			}
-		}
-			
-			return false;
-				
-	}   
-	
-	public boolean sameColor(int[] square) {
-		if(board.getBoardEntry(square).getColor() == this.getColor()) {
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public boolean isEmpty(int[] square) {
-		if(board.getBoardEntry(square) == null) {
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public boolean isEnemyGeneral(int[] square, boolean c) {
-		if(board.getBoardEntry(square).getRepr() == 'g' && !c) {
-			return true;
-		}
-		if(board.getBoardEntry(square).getRepr() == 'G' && c) {
-			return true;
-		}
-		return false;
-	}
-	
-	
-	// PUNI END
-	
 	protected boolean helperIsCheck() {
+		System.out.println("helperIsCheck");
 		if (color) { // black
 			for (Figure f: getBoard().redFigsCheckable) {
 				if (f.reachable(board.blackGeneral.getPosition())) {
@@ -158,7 +105,8 @@ public abstract class Figure implements Serializable{
 		return false;
 	}
 	
-	public boolean isCheck(Figure f, int[] backupPosition) { // 
+	public boolean isCheck(Figure f, int[] backupPosition) { 
+		System.out.println("isCheck");
 		if (helperIsCheck()) {
 			setPosition(backupPosition);
 			f.setPosition(getPosition());
@@ -168,7 +116,6 @@ public abstract class Figure implements Serializable{
 			f.removeFromList();
 			return true;
 		}
-		
 	}
 	
 	
@@ -179,12 +126,14 @@ public abstract class Figure implements Serializable{
 			return false;
 		}
 		if(reachable(square)) {
+			System.out.println("reachable true");
 			setPosition(square);
 		}
-		return isCheck(f, backUpPos);
+		//return isCheck(f, backUpPos);
+		return true;
 	}
 	
 
-	protected abstract boolean reachable(int[] square);	
+	protected abstract boolean reachable(int[] square);
 
 }

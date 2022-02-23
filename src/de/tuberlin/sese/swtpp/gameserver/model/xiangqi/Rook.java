@@ -13,24 +13,29 @@ public class Rook extends Figure implements Serializable {
 
 	private boolean canMoveVertical(int from, int to) {
 		for (int y = from; y==to; y++) {
+			System.out.println("Checking: "+y+""+getPosition()[1]);
 			if(board.getBoardEntry(new int[] {y, getPosition()[1]})!=null) {
 				return false;
 			}
 		}
+		System.out.println("test");
 		return true;
 	}
 	
 	private boolean canMoveHorizontal(int from, int to) {
 		for (int x = from; x==to; x++) {
-			if(board.getBoardEntry(new int[] {getPosition()[1], x})!=null) {
+			System.out.println("Checking: "+getPosition()[0]+""+x);
+			if(board.getBoardEntry(new int[] {getPosition()[0], x})!=null) {
 				return false;
 			}
 		}
+		System.out.println("test");
 		return true;
 	}
 	
 	@Override
 	public boolean reachable(int[] square) {
+		System.out.println("Rook");
 		if (square[0]<getPosition()[0] && square[1]==getPosition()[1]) {
 			return canMoveVertical(square[0], getPosition()[0]);
 		}

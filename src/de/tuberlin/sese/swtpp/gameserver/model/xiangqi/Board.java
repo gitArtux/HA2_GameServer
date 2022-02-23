@@ -106,21 +106,22 @@ public class Board implements Serializable{
 			c = Character.toUpperCase(c);
 			color = true;
 		}
+		System.out.println(c);
 		switch(c) {
 		case 'S':
-			f = new Soldier(pos, color, repr, this);
+			return new Soldier(pos, color, repr, this);
 		case 'A':
-			f = new Advisor(pos, color, repr, this);
+			return new Advisor(pos, color, repr, this);
 		case 'E':
-			f = new Elephant(pos, color, repr, this);
+			return new Elephant(pos, color, repr, this);
 		case 'H':
-			f = new Horse(pos, color, repr, this);
+			return new Horse(pos, color, repr, this);
 		case 'R':
-			f = new Rook(pos, color, repr, this);
+			return new Rook(pos, color, repr, this);
 		case 'C':
-			f = new Cannon(pos, color, repr, this);
+			return new Cannon(pos, color, repr, this);
 		case 'G':
-			f = new General(pos, color, repr, this);
+			return new General(pos, color, repr, this);
 		}
 		return f;
 	}

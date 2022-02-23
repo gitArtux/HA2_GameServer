@@ -9,8 +9,8 @@ public class General extends Figure implements Serializable {
 	
 	private int topB;
 	private int botB;
-	private int leftB = 4;
-	private int rightB = 6;
+	private int leftB = 3;
+	private int rightB = 5;
 	
 	public General(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
@@ -28,8 +28,9 @@ public class General extends Figure implements Serializable {
 	
 	@Override
 	public boolean reachable(int[] square)	{
+		System.out.println("General");
 		if((square[0]<=botB && square[0]>=topB) && (square[1]<=rightB && square[1]>=leftB) &&
-		Math.abs(getPosition()[0]-square[0])<=1 && Math.abs(getPosition()[1]-square[1])<=1 && !Arrays.equals(square, getPosition())){
+				((Math.abs(square[0]-getPosition()[0])==1 && (square[1]==getPosition()[1])) || (Math.abs(square[1]-getPosition()[1])==1 && (square[0]==getPosition()[0])))){
 			return true;
 		}
 		return false;

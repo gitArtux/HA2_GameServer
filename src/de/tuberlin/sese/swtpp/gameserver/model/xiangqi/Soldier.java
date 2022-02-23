@@ -3,7 +3,10 @@ package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 import java.io.Serializable;
 
 public class Soldier extends Figure implements Serializable {
-	int dir = -1;
+
+	private static final long serialVersionUID = -4134857827471815368L;
+	
+	private int dir = -1;
 	
 	public Soldier(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
@@ -15,6 +18,7 @@ public class Soldier extends Figure implements Serializable {
 	
 	@Override
 	public boolean reachable(int[] square) {
+		System.out.println("Pawn");
 		if ((getPosition()[0]+dir==square[0] && getPosition()[1]==square[1]) || 
 		(((color && getPosition()[0]>=5) || (!color && getPosition()[0]<=4)) && Math.abs(getPosition()[1]-square[1])==1 )) {
 			return true;
