@@ -43,6 +43,14 @@ public abstract class Figure implements Serializable{
 		}
 	}
 	
+	public void removeFromCheckable() {
+		if(!color) {
+			board.redFigsCheckable.remove(this);
+		}
+		else {
+			board.blackFigsCheckable.remove(this);
+		}
+	}
 	
 	public void setPosition(int[] pos) {
 		getBoard().setBoardEntry(this.pos, null);
