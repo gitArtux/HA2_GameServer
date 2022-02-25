@@ -11,12 +11,25 @@ public class Horse extends Figure implements Serializable {
 		addToCheckable();
 	}
 	
+	private boolean top(int[] square) {
+		return ((square[0]==getPosition()[0]-2 && square[1]==getPosition()[1]-1) || (square[0]==getPosition()[0]-2 && square[1]==getPosition()[1]+1)) && board.getBoardEntry(new int[] {getPosition()[0]-1, getPosition()[1]})==null;
+	}
+	
+	private boolean left(int[] square) {
+		return ((square[0]==getPosition()[0]-1 && square[1]==getPosition()[1]-2) || (square[0]==getPosition()[0]+1 && square[1]==getPosition()[1]-2)) && board.getBoardEntry(new int[] {getPosition()[0], getPosition()[1]-1})==null;
+	}
+	
+	private boolean bot(int[] square) {
+		return ((square[0]==getPosition()[0]-1 && square[1]==getPosition()[1]+2) || (square[0]==getPosition()[0]+1 && square[1]==getPosition()[1]+2)) && board.getBoardEntry(new int[] {getPosition()[0], getPosition()[1]+1})==null;
+	}
+	
+	private boolean right(int[] square) {
+		return ((square[0]==getPosition()[0]+2 && square[1]==getPosition()[1]-1) || (square[0]==getPosition()[0]+2 && square[1]==getPosition()[1]+1)) && board.getBoardEntry(new int[] {getPosition()[0]+1, getPosition()[1]})==null;
+	}
+	
 	@Override
 	public boolean reachable(int[] square) {
-		if ((((square[0]==getPosition()[0]-2 && square[1]==getPosition()[1]-1) || (square[0]==getPosition()[0]-2 && square[1]==getPosition()[1]+1)) && board.getBoardEntry(new int[] {getPosition()[0]-1, getPosition()[1]})==null)
-		|| (((square[0]==getPosition()[0]-1 && square[1]==getPosition()[1]-2) || (square[0]==getPosition()[0]+1 && square[1]==getPosition()[1]-2)) && board.getBoardEntry(new int[] {getPosition()[0], getPosition()[1]-1})==null)
-		|| (((square[0]==getPosition()[0]-1 && square[1]==getPosition()[1]+2) || (square[0]==getPosition()[0]+1 && square[1]==getPosition()[1]+2)) && board.getBoardEntry(new int[] {getPosition()[0], getPosition()[1]+1})==null)
-		|| (((square[0]==getPosition()[0]+2 && square[1]==getPosition()[1]-1) || (square[0]==getPosition()[0]+2 && square[1]==getPosition()[1]+1)) && board.getBoardEntry(new int[] {getPosition()[0]+1, getPosition()[1]})==null)){
+		if (top(square) || left(square) || bot(square) || right(square)){
 			return true;
 		}
 		return false;
