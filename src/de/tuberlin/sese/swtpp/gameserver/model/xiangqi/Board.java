@@ -132,10 +132,8 @@ public class Board implements Serializable{
 			return new Rook(pos, color, repr, this);
 		case 'C':
 			return new Cannon(pos, color, repr, this);
-		case 'G':
-			return new General(pos, color, repr, this);
 		}
-		return f;
+		return new General(pos, color, repr, this);
 	}
 	
 	// setBoard

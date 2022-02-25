@@ -29,7 +29,7 @@ public class Horse extends Figure implements Serializable {
 	
 	@Override
 	public boolean reachable(int[] square) {
-		if (top(square) || left(square) || bot(square) || right(square)){
+		if  (left(square) || bot(square) || right(square) || top(square)){
 			return true;
 		}
 		return false;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Elephant extends Figure implements Serializable {
 	
-	private int topB = 7;
+	private int topB = 5;
 	private int botB = 9;
 	
 	public Elephant(int[] pos, boolean color, char repr, Board board) {
@@ -12,7 +12,7 @@ public class Elephant extends Figure implements Serializable {
 		checkable=false;
 		if(color) {
 			topB = 0;
-			botB = 2;
+			botB = 4;
 		}
 		addToCheckable();
 	}
