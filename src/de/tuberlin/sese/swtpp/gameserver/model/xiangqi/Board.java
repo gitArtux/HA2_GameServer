@@ -38,6 +38,7 @@ public class Board implements Serializable{
 	public List<Figure> redFigsCheckable = new LinkedList<>();
 	public Figure blackGeneral;
 	public Figure redGeneral;
+	public int[][] positionsArray;
 	
 	public boolean deathstare() {
 		if (blackGeneral.getPosition()[1]==redGeneral.getPosition()[1]) {
@@ -169,25 +170,58 @@ public class Board implements Serializable{
 		}
 	}
 	
-	public boolean helperIsMate(Figure f) {
+	// PUNI BEGIN
+	
+	public boolean canMoveForIsMate(Figure f, int[] a, Figure backUpFig, int[] backUpPos) {
 		
+		boolean check;
+		
+		if(!f.reachable(a) || backUpFig.getColor() == f.getColor() || f== f.getBoard().getBoardEntry(a)) { // Skippt eigene Position um Fehler zu meiden
+			return false;
+		}
+		
+		if(backUpFig != null) { // Muss leider diese Methoden 2x mit "!=null"-ifs checken
+			backUpFig.removeFromCheckable();
+		}
+			
+		f.setPosition(a);
+			
+		check = f.helperIsCheck();
+			
+		f.setPosition(backUpPos);
+			
+		if(backUpFig != null) {
+			backUpFig.addToCheckable();
+		}
+		
+		return !check; // returnt true, wenn check falsch ist aka. wenn kein Schack bei dem Zug, kann der Spieler dem Schach entfliehen
+		
+	}
+	
+	public boolean iteratorForIsMate(Figure f) {
+		
+		int[] backUpPos = f.getPosition();
+		Figure backUpFig;
 		int i, j;
+		
 		for(i = 0; i < 9; i++){
 			for(j = 0; j < 8; j++){
 				int[] a = {i, j};
-				if(f.reachable(a) && !f.helperIsCheck()) {
+				backUpFig = getBoardEntry(a);
+				if(canMoveForIsMate(f, a, backUpFig, backUpPos)){ // Kann die Figur sich bewegen? Wenn JA, returnt iteratorForIsMate FALSE
 					return false;
 				}
-			}
+			}	
 		}
+		
 		return true;
 		
 	}
 	
-	public boolean isMate(List<Figure> l, Player player) {
+	public boolean isMate(List<Figure> l, Player player) { // l = Liste der gegnerischen Figuren
 	
-		for(Figure f : l) {
-			if(!helperIsMate(f)) {
+		for(Figure f : l) { // Geht mit allen Figuren zu der 2xLoop von iteratorForIsMate
+			if(!iteratorForIsMate(f)) {
 				return false;
 			}
 		}
@@ -200,5 +234,7 @@ public class Board implements Serializable{
 		
 	}
 	
+	// PUNI END
 	
 }
+

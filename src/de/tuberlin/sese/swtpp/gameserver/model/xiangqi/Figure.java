@@ -1,6 +1,7 @@
 package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 
 import java.io.Serializable;
+import java.util.List;
 
 import de.tuberlin.sese.swtpp.gameserver.model.Player;
 
@@ -21,6 +22,8 @@ public abstract class Figure implements Serializable{
 		setColor(color);
 		setRepr(repr);
 		setBoard(board);
+		System.out.println("Type: "+this.getClass().getName()); 
+		
 	}
 	
 	protected void setBoard(Board board) {
@@ -86,23 +89,21 @@ public abstract class Figure implements Serializable{
 	}
 	
 	protected boolean helperIsCheck() {
-		if (color && !getBoard().deathstare()) { // black
+		if (color) { // black
 			for (Figure f: getBoard().redFigsCheckable) {
 				if (f.reachable(board.blackGeneral.getPosition())) {
 					return true;
 				}
 			}
-			return false;
 		} 
-		else if (!getBoard().deathstare()){
+		else {
 			for (Figure f: getBoard().blackFigsCheckable) {
 				if (f.reachable(board.redGeneral.getPosition())) {
 					return true;
 				}
 			}
-			return false;
 		}
-		return true;
+		return false;
 	}
 	
 	public boolean isCheck(Figure f, int[] backupPosition) { 
@@ -130,12 +131,13 @@ public abstract class Figure implements Serializable{
 		setPosition(square);
 		boolean moveAllowed = isCheck(f, backUpPos);
 		
+		// PUNI BEGIN
 		if(f.getColor()) {
 			board.isMate(board.redFigsCheckable, player);
 		}else {
 			board.isMate(board.blackFigsCheckable, player);
 		}
-		
+		// PUNI END
 		
 		return moveAllowed;
 	}
