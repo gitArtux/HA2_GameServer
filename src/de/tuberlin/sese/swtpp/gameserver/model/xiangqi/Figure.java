@@ -2,57 +2,61 @@ package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 
 import java.io.Serializable;
 
+import de.tuberlin.sese.swtpp.gameserver.model.Player;
+
 
 
 public abstract class Figure implements Serializable{
 	
 	private static final long serialVersionUID = -2084306411289420422L;
 	
-	
+	protected boolean checkable=true;
 	protected int[] pos; 			// row, col
 	protected boolean color; 		// red = false, black = true
 	protected char repr;
 	protected Board board;
 
-	
-
-	
 	public Figure(int[] pos, boolean color, char repr, Board board) {
-		setPosition(pos);
+		this.pos=pos;
 		setColor(color);
 		setRepr(repr);
 		setBoard(board);
-		
 	}
 	
 	protected void setBoard(Board board) {
 		this.board=board;
 	}
 	
+	protected Board getBoard() {
+		return board;
+	}
+	
 	protected void addToCheckable() {
-		if(color) {
-			board.blackFigsCheckable.add(this);
+		if(!color) {
+			board.redFigsCheckable.add(this);
 		}
 		else {
-			board.redFigsCheckable.add(this);
+			board.blackFigsCheckable.add(this);
 		}
 	}
 	
 	public void removeFromCheckable() {
-		if(color) {
-			board.blackFigsCheckable.remove(this);
+		if(!color) {
+			board.redFigsCheckable.remove(this);
 		}
 		else {
-			board.redFigsCheckable.remove(this);
+			board.blackFigsCheckable.remove(this);
 		}
 	}
 
 	
 	public void setPosition(int[] pos) {
+		getBoard().setBoardEntry(this.pos, null);
 		this.pos = pos.clone();
+		getBoard().setBoardEntry(this.pos, this);
 	}
 	
-	public int[] getPostion() {
+	public int[] getPosition() {
 		return pos.clone();
 	}
 	
@@ -72,64 +76,71 @@ public abstract class Figure implements Serializable{
 		return repr;
 	}
 	
-	// PUNI Begin
-	
-	public boolean outOfBoard(int[] square) {
-		
-		// Primitiven Datentypen (z.B. int) haben kein null => muss man nicht checken
-		
-		if(square[0] < 0 || square[0] > 9) {
-			return true;
+	protected void removeFromList() { // this
+		if(checkable && color) { //black
+			getBoard().blackFigsCheckable.remove(this);
 		}
-		
-		if(square[1] < 0 || square[1] > 8) {
-			return true;
+		else if(checkable && !color){
+			getBoard().redFigsCheckable.remove(this);
 		}
-		
-		return false;
 	}
 	
-	public boolean outOfRiver(int[] square, boolean color) {
-		
-		if(color) {
-			if(square[0] >= 5){
-			return true;
+	protected boolean helperIsCheck() {
+		if (color && !getBoard().deathstare()) { // black
+			for (Figure f: getBoard().redFigsCheckable) {
+				if (f.reachable(board.blackGeneral.getPosition())) {
+					return true;
+				}
 			}
-		}
-			
-		if(!color) {
-			if(square[0] <= 4){
-				return true;
+			return false;
+		} 
+		else if (!getBoard().deathstare()){
+			for (Figure f: getBoard().blackFigsCheckable) {
+				if (f.reachable(board.redGeneral.getPosition())) {
+					return true;
+				}
 			}
+			return false;
 		}
+		return true;
+	}
+	
+	public boolean isCheck(Figure f, int[] backupPosition) { 
+		if (helperIsCheck()) {
+			setPosition(backupPosition);
+			if(f!=null) {
+				f.setPosition(f.getPosition());
+			}
 			
 			return false;
-				
-	}   
-	
-	public boolean sameColor(int[] square) {
-		if(board.getBoardEntry(square).getColor() == this.getColor()) {
-			return true;
 		}
-		
-		return false;
-	}
-	
-	public boolean isEmpty(int[] square) {
-		if(board.getBoardEntry(square) == null) {
-			return true;
+		else if (f!=null){
+			f.removeFromList();
 		}
-		
-		return false;
+		return true;
 	}
 	
 	
-	// PUNI END
+	public boolean tryMove(int[] square, Player player) {
+		int backUpPos[] = {getPosition()[0], getPosition()[1]};
+		Figure f = board.getBoardEntry(square);
+		if ((f!=null && f.getColor()==getColor()) || !reachable(square)) {
+			return false;
+		}
+		setPosition(square);
+		boolean moveAllowed = isCheck(f, backUpPos);
+		
+		if(f.getColor()) {
+			board.isMate(board.redFigsCheckable, player);
+		}else {
+			board.isMate(board.blackFigsCheckable, player);
+		}
+		
+		
+		return moveAllowed;
+	}
 	
-	public abstract boolean tryMove(int[] square);
-	
-	public abstract boolean givesCheck();
-	
-	
+
+	protected abstract boolean reachable(int[] square);
 
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.tuberlin.sese.swtpp.gameserver.model.Player;
+
 public class Board implements Serializable{
 	
 	private static final long serialVersionUID = -2496645958349826119L;
@@ -34,13 +36,25 @@ public class Board implements Serializable{
 	
 	public List<Figure> blackFigsCheckable = new LinkedList<>();
 	public List<Figure> redFigsCheckable = new LinkedList<>();
+	public Figure blackGeneral;
+	public Figure redGeneral;
 	
-
+	public boolean deathstare() {
+		if (blackGeneral.getPosition()[1]==redGeneral.getPosition()[1]) {
+			for (int y = blackGeneral.getPosition()[0]+1; y!=redGeneral.getPosition()[0]; y++) {
+				if (getBoardEntry(new int[] {y,blackGeneral.getPosition()[1]})!=null) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 	
 	// translates strPos to LogicPos for Example "a9" --> new int[] {0, 0}
 	public int[] translateToPos(String strPos) {
 		char[] charArrayPos = strPos.toCharArray();
-		return new int[] {9 - charArrayPos[1], Character.getNumericValue(charArrayPos[0] - 10)};
+		return new int[] {9-Character.getNumericValue(charArrayPos[1]), Character.getNumericValue(charArrayPos[0])-10};
 	}
 	
 	
@@ -89,14 +103,6 @@ public class Board implements Serializable{
 		return board[pos[0]][pos[1]];
 	}
 	
-	// PUNI Begin 
-	
-	public Figure getBoardEntry(int a, int b) { // Overloading sicherheitshalber, falls man's braucht
-		return board[a][b];
-	}
-	
-	// PUNI END
-	
 	public void setBoardEntry(int[] pos, Figure f) {
 		board[pos[0]][pos[1]] = f;
 	}
@@ -114,19 +120,19 @@ public class Board implements Serializable{
 		}
 		switch(c) {
 		case 'S':
-			f = new Soldier(pos, color, repr, this);
+			return new Soldier(pos, color, repr, this);
 		case 'A':
-			f = new Advisor(pos, color, repr, this);
+			return new Advisor(pos, color, repr, this);
 		case 'E':
-			f = new Elephant(pos, color, repr, this);
+			return new Elephant(pos, color, repr, this);
 		case 'H':
-			f = new Horse(pos, color, repr, this);
+			return new Horse(pos, color, repr, this);
 		case 'R':
-			f = new Rook(pos, color, repr, this);
+			return new Rook(pos, color, repr, this);
 		case 'C':
-			f = new Cannon(pos, color, repr, this);
+			return new Cannon(pos, color, repr, this);
 		case 'G':
-			f = new General(pos, color, repr, this);
+			return new General(pos, color, repr, this);
 		}
 		return f;
 	}
@@ -162,4 +168,37 @@ public class Board implements Serializable{
 			}
 		}
 	}
+	
+	public boolean helperIsMate(Figure f) {
+		
+		int i, j;
+		for(i = 0; i < 9; i++){
+			for(j = 0; j < 8; j++){
+				int[] a = {i, j};
+				if(f.reachable(a) && !f.helperIsCheck()) {
+					return false;
+				}
+			}
+		}
+		return true;
+		
+	}
+	
+	public boolean isMate(List<Figure> l, Player player) {
+	
+		for(Figure f : l) {
+			if(!helperIsMate(f)) {
+				return false;
+			}
+		}
+		
+		player.setWinner();
+		player.finishGame();
+		player.getGame().getNextPlayer().finishGame(); // Beide Spieler müssen ja finishGame() machen, oder? Ansonsten lösch' diese Zeile
+		
+		return true;
+		
+	}
+	
+	
 }

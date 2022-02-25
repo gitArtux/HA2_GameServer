@@ -4,83 +4,33 @@ import java.io.Serializable;
 
 public class Advisor extends Figure implements Serializable {
 	
+	private static final long serialVersionUID = 3589471797532078076L;
+	
+	private int topB;
+	private int botB;
+	private int leftB = 3;
+	private int rightB = 5;
+	
 	public Advisor(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
+		checkable=false;
+		if (color) { //black
+			topB=0;
+			botB=2;
+		}
+		else {
+			topB=7;
+			botB=9;
+		}
+		addToCheckable();
 	}
 	
-		
-	public boolean inPalace(int[] square, boolean color) {
-		
-		if(color) {
-			int[] a = {0, 2, 1};
-			return palaceCalc(a, square);	
-		}	
-		if(!color) {
-			int[] a = {7, 9, 8};
-			return palaceCalc(a, square);
-		}
-			
-			return false;	
-	}   	
-	
-	boolean palaceCalc(int[] a, int[] square) {
-		if((square[0] == a[0] && square[1]  == (3^5))
-				||
-			(square[0] == a[1] && square[1]  == (3^5))
-				||
-			square[0] == a[2] && square[1] == 4){
+	@Override 
+	public boolean reachable(int[] square) {
+		if ((square[0]<=botB && square[0]>=topB) && (square[1]<=rightB && square[1]>=leftB)&&
+		(Math.abs(square[0]-getPosition()[0])==1 && Math.abs(square[1]-getPosition()[1])==1)) {
 			return true;
 		}
-		
 		return false;
 	}
-		
-	public boolean possibleMove(int[] square) { // not Finished
-		
-		if(this.getPostion()[1] != 4) {
-			if(square[1] != 4) {
-				return false;
-			}
-		}
-			
-			return true;
-		
-	}
-
-	@Override
-	public boolean tryMove(int[] square) {
-		
-		if(outOfBoard(square)) {
-			return false;
-		}
-		
-		if (!(inPalace(square, this.getColor()))) {
-			return false;
-		}
-		
-		if (!possibleMove(square)) {
-			return false;
-		}
-		
-		if(!this.isEmpty(square)) {
-			if(this.sameColor(square)) {
-				return false;
-			}
-		}
-			
-		this.setPosition(square);
-		
-		// givesCheck()
-		
-		return true;
-		
-	}
-	
-	@Override
-	public  boolean givesCheck() {
-		// TODO:
-		return false;
-	}
-	
-
 }

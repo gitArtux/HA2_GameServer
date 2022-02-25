@@ -75,7 +75,101 @@ public class TryMoveIntegrationTest {
 	    assertMove("e3-e4",true,true);
 	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
 	}
+	
+	
+	//MyTests
+	@Test
+	public void tryMoveXiangqiGame() {
+		//Player
+		startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",false);
+	    assertMove("e0-d0",true,false);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",false,false,false);
+	    
+		startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",false);
+	    assertMove("e0-d0",false,false);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",false,false,false);
+		
+		
+		//Formatting
+	    startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",true);
+	    assertMove("e0d0",true,false);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",true,false,false);
+	    
+	    startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",true);
+	    assertMove("0e-d0",true,false);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",true,false,false);
+	    
+	    //SetnextPlayer
+	    startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",true);
+	    assertMove("e0-d0",true,true);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",false,false,false);
+	    
+	    startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",false);
+	    assertMove("e9-d9",false,true);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",true,false,false);
+	    
+	}
+	
+	@Test
+	public void setBoardTest() {
+	    startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
+	    assertMove("e3-e4",true,true);
+	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
+	}
+	
+	
+	
+	@Test
+	public void rook() {
+		startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",true);
+	    assertMove("e0-d0",true,true);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",false,false,false);
+	}
+	
+	@Test
+	public void knight() {
+		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
+	    assertMove("e3-e4",true,true);
+	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
+	}
+	
+	@Test
+	public void elephant() {
+		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
+	    assertMove("e3-e4",true,true);
+	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
+	}
+	
+	@Test
+	public void advisor() {
+		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
+	    assertMove("e3-e4",true,true);
+	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
+	}
+	
+	@Test
+	public void general() {
+		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
+	    assertMove("e3-e4",true,true);
+	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
+	}
+	
+	@Test
+	public void cannon() {
+		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
+	    assertMove("e3-e4",true,true);
+	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
+	}
+	
+	@Test
+	public void soldier() {
+		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
+	    assertMove("e3-e4",true,true);
+	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
+	}
+	 
 
-	//TODO: implement test cases of same kind as example here
+	    
+	    
 
 }

@@ -2,99 +2,38 @@ package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 
 import java.io.Serializable;
 
+
 public class General extends Figure implements Serializable {
 	
 	private static final long serialVersionUID = 3589471797532078075L;
 	
+	private int topB;
+	private int botB;
+	private int leftB = 3;
+	private int rightB = 5;
+	
 	public General(int[] pos, boolean color, char repr, Board board) {
 		super(pos, color, repr, board);
 		addToCheckable();
+		if(color) {	// black
+			board.blackGeneral = this;
+			topB=0;
+			botB=2;
+		} else {
+			board.redGeneral = this;
+			topB=7;
+			botB=9;
+		}
 	}
 	
-		
-	public boolean inPalace(int[] square, boolean color) {	
-			
-		if(color) {
-			int[] a = {0, 2};
-			return palaceCalc(a, square);
-		}
-			
-		if(!color) {
-			int[] a = {7, 9};
-			return palaceCalc(a, square);
-		}
-			
-		return false;
-				
-	}   
-		
-	boolean palaceCalc(int[] a, int[] square) {
-		
-		if(square[0] >= a[0] && square[0] <= a[1] &&
-				square[1] >= 3 && square[1] <= 5){
-					return true;
-			}
-			
-			return false;
-		}
 	
-	public boolean possibleMove(int[] square, int[] a) {
-		
-		if(square[0] == a[0]+1 	&& square[1] == a[1]
-				||
-				square[0] == a[0]-1 && square[1] == a[1]
-				||
-				square[0] == a[0] 	&& square[1] == a[1]+1	
-				||
-				square[0] == a[0] 	&& square[1] == a[1]-1){
-			
+	@Override
+	public boolean reachable(int[] square)	{
+		if((square[0]<=botB && square[0]>=topB) && (square[1]<=rightB && square[1]>=leftB) &&
+				((Math.abs(square[0]-getPosition()[0])==1 && (square[1]==getPosition()[1])) || (Math.abs(square[1]-getPosition()[1])==1 && (square[0]==getPosition()[0])))){
 			return true;
 		}
-		
 		return false;
 	}
-	
-	
-	@Override
-	public boolean tryMove(int[] square) { // red = false, black = true; red beginnt & ist unten
-	
-		if(outOfBoard(square)) { // Checkt ob square[] im Board ist & nicht OutOfBounds
-			return false;
-		}
-		
-		if (!(inPalace(square, this.getColor()))) { // Checkt, ob square[] im Palast befindet
-			return false;
-		}
-		
-		int a[] = {this.getPostion()[0], this.getPostion()[1]}; 
-		
-		if (!possibleMove(square, a)) {
-			return false;
-		}
-			
-		if(!this.isEmpty(square)) {
-			if(this.sameColor(square)) {
-				return false;
-			}
-		}
-			
-		
-		this.setPosition(square);
-		
-		// givesCheck()
-		
-		return true;
-		
-	}
-	
-	@Override
-	public  boolean givesCheck() { // General hat Deathstare als givesCheck
-		// TODO:
-		return false;
-	}
-	
 
-		
-
-	
 }
