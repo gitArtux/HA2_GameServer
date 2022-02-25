@@ -22,6 +22,7 @@ public class Advisor extends Figure implements Serializable {
 			topB=7;
 			botB=9;
 		}
+		addToCheckable();
 	}
 	
 	@Override 
