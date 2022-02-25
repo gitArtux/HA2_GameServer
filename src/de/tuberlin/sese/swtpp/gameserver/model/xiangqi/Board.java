@@ -167,8 +167,9 @@ public class Board implements Serializable{
 		}
 	}
 	
-	// PUNI BEGIN
-/*	
+	/*
+	// IsMate: BEGIN
+	
 	public boolean canMoveForIsMate(Figure f, int[] a, Figure backUpFig, int[] backUpPos) {
 		
 		boolean check;
@@ -231,7 +232,7 @@ public class Board implements Serializable{
 		
 	}
 	
-	// PUNI END
+	// IsMate END
 	*/
 }
 

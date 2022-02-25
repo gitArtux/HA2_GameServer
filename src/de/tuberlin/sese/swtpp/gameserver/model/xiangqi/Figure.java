@@ -121,15 +121,17 @@ public abstract class Figure implements Serializable{
 		setPosition(square);
 		boolean moveAllowed = isCheck(f, backUpPos);
 		
-		/*	// PUNI BEGIN
+		/*
+		// IsMate BEGIN
+		
 		if(f.getColor()) {
 			board.isMate(board.redFigsCheckable, player);
 		}else {
 			board.isMate(board.blackFigsCheckable, player);
 		}
-		// PUNI END
-		 
-		 */
+		
+		// IsMate END
+		*/
 		
 		return moveAllowed;
 	} 
