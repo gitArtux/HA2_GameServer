@@ -102,11 +102,11 @@ public class TryMoveIntegrationTest {
 	    //SetnextPlayer
 	    startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",true);
 	    assertMove("e0-d0",true,true);
-	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",false,false,false);
+	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/3G5",false,false,false);
 	    
 	    startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",false);
-	    assertMove("e9-d9",false,true);
-	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",true,false,false);
+	    assertMove("e9-f9",false,true);
+	    assertGameState("5g3/4a4/9/9/9/9/9/9/9/4G4",true,false,false);
 	    
 	}
 	
@@ -117,59 +117,120 @@ public class TryMoveIntegrationTest {
 	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
 	}
 	
-	
-	
 	@Test
-	public void rook() {
+	public void deathstare() {
 		startGame("4g4/4a4/9/9/9/9/9/9/9/4G4",true);
-	    assertMove("e0-d0",true,true);
-	    assertGameState("4g4/4a4/9/9/9/9/9/9/9/4G4",false,false,false);
+		assertMove("e0-d0",true,true);
+		assertGameState("4g4/4a4/9/9/9/9/9/9/9/3G5",false,false,false);
+		
+		startGame("4g4/4a4/9/9/9/9/9/9/4A4/4G4",true);
+		assertMove("e1-d0",true,true);
+		assertGameState("4g4/4a4/9/9/9/9/9/9/9/3AG4",false,false,false);
+		
+		startGame("4g4/9/9/9/9/9/9/9/4A4/4G4",true);
+		assertMove("e1-d0",true,false);
+		assertGameState("4g4/9/9/9/9/9/9/9/4A4/4G4",true,false,false);
 	}
 	
 	@Test
-	public void knight() {
+	public void figuren() {
+		// Rook
+		startGame("4g4/4a4/e8/9/4r4/4R4/9/9/4A4/4G4",true);
+		assertMove("e4-a4",true,true);
+		assertMove("e5-i5",false,true);
+		assertMove("a4-a1",true,true);
+		assertMove("i5-i8",false,true);
+		assertMove("a1-a9",true,false);
+		assertMove("a1-i1",true,false);
+		assertGameState("4g4/4a3r/e8/9/9/9/9/9/R3A4/4G4",true,false,false);
+		
+		// Cannon
+		startGame("4g4/4a4/7C1/9/7S1/7s1/1C1H1h1c1/9/4A4/4G4",true);
+		assertMove("b3-h3",true,false);
+		assertMove("b3-f3",true,true);
+		assertMove("h3-f3",false,false);
+		
+		assertMove("h3-h7",false,false);
+		assertMove("h3-h5",false,true);
+		assertMove("h7-h5",true,false);
+		assertGameState("4g4/4a4/7C1/9/7c1/7s1/3H1C3/9/4A4/4G4",true,false,false);
+		
+		//All Others
 		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
-	    assertMove("e3-e4",true,true);
-	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
-	}
-	
-	@Test
-	public void elephant() {
-		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
-	    assertMove("e3-e4",true,true);
-	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
-	}
-	
-	@Test
-	public void advisor() {
-		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
-	    assertMove("e3-e4",true,true);
-	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
-	}
-	
-	@Test
-	public void general() {
-		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
-	    assertMove("e3-e4",true,true);
-	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
-	}
-	
-	@Test
-	public void cannon() {
-		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
-	    assertMove("e3-e4",true,true);
-	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
-	}
-	
-	@Test
-	public void soldier() {
-		startGame("rheagaehr/9/1c5c1/s1s1s1s1s/9/9/S1S1S1S1S/1C5C1/9/RHEAGAEHR",true);
-	    assertMove("e3-e4",true,true);
-	    assertGameState("rheagaehr/9/1c5c1/s1s1s1s1s/9/4S4/S1S3S1S/1C5C1/9/RHEAGAEHR",false,false,false);
-	}
-	 
-
+		//King
+	    assertMove("e0-d1",true,false);
+	    assertMove("e0-e1",true,true);
+	    
+	    //Advisor
+	    assertMove("d9-d8",false,false);
+	    assertMove("d9-e8",false,true);
+	    
+	    //Horse
+	    assertMove("h0-f1",true,false);
+	    assertMove("h0-g2",true,true);
+	    
+	    //Pawn
+	    assertMove("e6-d6",false,false);
+	    assertMove("e6-e5",false,true);
+	    
+	    //Elephant
+	    assertMove("g0-e2",true,true);
+	    assertMove("e8-d9",false,true);
+	    
+	    assertMove("e1-f1",true,true);
+	    assertMove("e5-e4",false,true);
+	    
+	    assertMove("e2-g0",true,false);
+	    assertMove("c3-c4",true,true);
+	    
+	    assertMove("e4-d4",false,true);
+	    assertMove("c4-c5",true,true);
+	    
+	    assertMove("d4-e4",false,true);
+	    assertMove("c5-d5",true,true);
 	    
 	    
+	    assertGameState("rheagaehr/9/1c5c1/s1s3s1s/3S5/4s4/S3S1S1S/1C2E1HC1/5G3/RHEA1A2R",false,false,false);
 
+		
+	}
+	
+	@Test
+	public void missings() {
+		startGame("4g4/4a4/4e4/9/9/9/9/4H4/9/4G4",true);
+	    assertMove("e2-f4",true,true);
+	    assertMove("e7-c9",false,true);
+	    assertMove("f4-g2",true,true);
+	    assertMove("c9-a7",false,true);
+	    assertMove("g2-e3",true,true);
+	    assertMove("a7-c5",false,true);
+	    assertMove("e3-g4",true,true);
+	    assertMove("c5-e3",false,false);
+	    assertMove("c5-e7",false,true);
+	    
+	    assertMove("g4-f2",true,true);
+	    assertMove("e9-d9",false,true);
+	    
+	    assertMove("f2-e4",true,true);
+	    assertMove("d9-e9",false,true);
+	    
+	    assertMove("e4-g3",true,true);
+	    assertMove("e9-d9",false,true);
+	    
+	    assertMove("g3-e2",true,true);
+	    assertMove("d9-e9",false,true);
+	    
+	    assertGameState("4g4/4a4/4e4/9/9/9/9/4H4/9/4G4",true,false,false);
+	    
+	    
+	    
+	    startGame("4g4/9/9/9/4s4/4S4/9/9/4C4/rH2G4",false);
+	    assertMove("e5-e4",false,false);
+	    assertMove("e9-d9",false,true);
+	    assertMove("b0-c2",true,false);
+	    
+	    assertGameState("3g5/9/9/9/4s4/4S4/9/9/4C4/rH2G4",true,false,false);
+	    
+	    
+	}
 }
