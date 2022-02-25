@@ -18,9 +18,8 @@ public class Soldier extends Figure implements Serializable {
 	
 	@Override
 	public boolean reachable(int[] square) {
-		System.out.println("Pawn");
 		if ((getPosition()[0]+dir==square[0] && getPosition()[1]==square[1]) || 
-		(((color && getPosition()[0]>=5) || (!color && getPosition()[0]<=4)) && Math.abs(getPosition()[1]-square[1])==1 )) {
+		(((color && getPosition()[0]>=5) || (!color && getPosition()[0]<=4)) && Math.abs(getPosition()[1]-square[1])==1 && getPosition()[0]==square[0])) {
 			return true;
 		}
 		return false;

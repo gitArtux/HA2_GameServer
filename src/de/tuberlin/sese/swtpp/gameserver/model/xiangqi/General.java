@@ -28,7 +28,6 @@ public class General extends Figure implements Serializable {
 	
 	@Override
 	public boolean reachable(int[] square)	{
-		System.out.println("General");
 		if((square[0]<=botB && square[0]>=topB) && (square[1]<=rightB && square[1]>=leftB) &&
 				((Math.abs(square[0]-getPosition()[0])==1 && (square[1]==getPosition()[1])) || (Math.abs(square[1]-getPosition()[1])==1 && (square[0]==getPosition()[0])))){
 			return true;

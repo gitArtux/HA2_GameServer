@@ -87,7 +87,6 @@ public abstract class Figure implements Serializable{
 	}
 	
 	protected boolean helperIsCheck() {
-		System.out.println("helperIsCheck");
 		if (color) { // black
 			for (Figure f: getBoard().redFigsCheckable) {
 				if (f.reachable(board.blackGeneral.getPosition())) {
@@ -106,31 +105,29 @@ public abstract class Figure implements Serializable{
 	}
 	
 	public boolean isCheck(Figure f, int[] backupPosition) { 
-		System.out.println("isCheck");
 		if (helperIsCheck()) {
 			setPosition(backupPosition);
-			f.setPosition(getPosition());
+			if(f!=null) {
+				f.setPosition(f.getPosition());
+			}
+			
 			return false;
 		}
-		else {
+		else if (f!=null){
 			f.removeFromList();
-			return true;
 		}
+		return true;
 	}
 	
 	
 	public boolean tryMove(int[] square) {
 		int backUpPos[] = {getPosition()[0], getPosition()[1]};
 		Figure f = board.getBoardEntry(square);
-		if (f!=null && f.getColor()==getColor()) {
+		if ((f!=null && f.getColor()==getColor()) || !reachable(square)) {
 			return false;
 		}
-		if(reachable(square)) {
-			System.out.println("reachable true");
-			setPosition(square);
-		}
-		//return isCheck(f, backUpPos);
-		return true;
+		setPosition(square);
+		return isCheck(f, backUpPos);
 	}
 	
 

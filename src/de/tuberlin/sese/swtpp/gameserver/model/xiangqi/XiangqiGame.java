@@ -240,15 +240,7 @@ public class XiangqiGame extends Game implements Serializable{
 			// check if logical Move is correct
 			Figure f = board.getBoardEntry(board.translateToPos(moveArr[0]));
 			
-			System.out.println();
-			System.out.println(f.getRepr());
-			System.out.println("Pos of f: "+f.getPosition()[0]+""+f.getPosition()[1]); 
-			System.out.println("Pos of square: "+board.translateToPos(moveArr[1])[0]+""+board.translateToPos(moveArr[1])[1]); 
-			System.out.println("Move: "+moveArr[0]+"-"+moveArr[1]); 
-			System.out.println("Type: "+f.getClass().getName()); 
-			
-			
-			if (f!=null && f.tryMove(board.translateToPos(moveArr[1]))) {
+			if (f!=null && ((f.getColor() && player==blackPlayer) || (!f.getColor() && player==redPlayer)) && f.tryMove(board.translateToPos(moveArr[1]))) {
 				
 				// Add Move to history and set next Player
 				history.add(new Move(moveString, board.getBoard(), player));
