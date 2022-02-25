@@ -3,6 +3,8 @@ package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 import java.io.Serializable;
 import java.util.List;
 
+import de.tuberlin.sese.swtpp.gameserver.model.Player;
+
 
 
 public abstract class Figure implements Serializable{
@@ -120,14 +122,18 @@ public abstract class Figure implements Serializable{
 	}
 	
 	
-	public boolean tryMove(int[] square) {
+	public boolean tryMove(int[] square, Player player) {
 		int backUpPos[] = {getPosition()[0], getPosition()[1]};
 		Figure f = board.getBoardEntry(square);
 		if ((f!=null && f.getColor()==getColor()) || !reachable(square)) {
 			return false;
 		}
 		setPosition(square);
-		return isCheck(f, backUpPos);
+		boolean moveAllowed = isCheck(f, backUpPos);
+		
+		// ismate //
+		
+		return moveAllowed;
 	}
 	
 

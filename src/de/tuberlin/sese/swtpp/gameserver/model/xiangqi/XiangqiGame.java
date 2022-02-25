@@ -231,7 +231,6 @@ public class XiangqiGame extends Game implements Serializable{
 			  	return false;
 			}
 			
-			
 			for(String strPos: moveArr) {
 				if (strPos.length()!=2 || !"abcdefghi".contains(String.valueOf(strPos.charAt(0))) || !"0123456789".contains(String.valueOf(strPos.charAt(1)))) {
 					return false;
@@ -240,7 +239,7 @@ public class XiangqiGame extends Game implements Serializable{
 			// check if logical Move is correct
 			Figure f = board.getBoardEntry(board.translateToPos(moveArr[0]));
 			
-			if (f!=null && ((f.getColor() && player==blackPlayer) || (!f.getColor() && player==redPlayer)) && f.tryMove(board.translateToPos(moveArr[1]))) {
+			if (f!=null && ((f.getColor() && player==blackPlayer) || (!f.getColor() && player==redPlayer)) && f.tryMove(board.translateToPos(moveArr[1]), player)) {
 				
 				// Add Move to history and set next Player
 				history.add(new Move(moveString, board.getBoard(), player));
