@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.tuberlin.sese.swtpp.gameserver.model.Player;
+
 public class Board implements Serializable{
 	
 	private static final long serialVersionUID = -2496645958349826119L;
@@ -164,4 +166,37 @@ public class Board implements Serializable{
 			}
 		}
 	}
+	
+	public boolean helperIsMate(Figure f) {
+		
+		int i, j;
+		for(i = 0; i < 9; i++){
+			for(j = 0; j < 8; j++){
+				int[] a = {i, j};
+				if(f.reachable(a) && !f.helperIsCheck()) {
+					return false;
+				}
+			}
+		}
+		return true;
+		
+	}
+	
+	public boolean isMate(List<Figure> l, Player player) {
+	
+		for(Figure f : l) {
+			if(!helperIsMate(f)) {
+				return false;
+			}
+		}
+		
+		player.setWinner();
+		player.finishGame();
+		player.getGame().getNextPlayer().finishGame(); // Beide Spieler müssen ja finishGame() machen, oder? Ansonsten lösch' diese Zeile
+		
+		return true;
+		
+	}
+	
+	
 }

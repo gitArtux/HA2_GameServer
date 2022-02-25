@@ -14,6 +14,7 @@ public class Elephant extends Figure implements Serializable {
 			topB = 0;
 			botB = 4;
 		}
+		addToCheckable();
 	}
 	
 	private boolean topLeft(int[] square) {
@@ -41,4 +42,7 @@ public class Elephant extends Figure implements Serializable {
 		
 		return false;
 	}
+	
+	
+	
 }
