@@ -39,7 +39,17 @@ public class Board implements Serializable{
 	public Figure blackGeneral;
 	public Figure redGeneral;
 	
-
+	public boolean deathstare() {
+		if (blackGeneral.getPosition()[1]==redGeneral.getPosition()[1]) {
+			for (int y = blackGeneral.getPosition()[0]+1; y!=redGeneral.getPosition()[0]; y++) {
+				if (getBoardEntry(new int[] {y,blackGeneral.getPosition()[1]})!=null) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 	
 	// translates strPos to LogicPos for Example "a9" --> new int[] {0, 0}
 	public int[] translateToPos(String strPos) {

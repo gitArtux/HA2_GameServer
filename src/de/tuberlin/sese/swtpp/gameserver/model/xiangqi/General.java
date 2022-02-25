@@ -1,7 +1,7 @@
 package de.tuberlin.sese.swtpp.gameserver.model.xiangqi;
 
 import java.io.Serializable;
-import java.util.Arrays;
+
 
 public class General extends Figure implements Serializable {
 	
@@ -25,6 +25,7 @@ public class General extends Figure implements Serializable {
 			botB=9;
 		}
 	}
+	
 	
 	@Override
 	public boolean reachable(int[] square)	{
