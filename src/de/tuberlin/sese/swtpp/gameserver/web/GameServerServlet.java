@@ -34,7 +34,7 @@ public class GameServerServlet extends HttpServlet {
 
     // TODO: change location of data if you like
     // this is just hardcoded to "somewhere"
-    private static final String DB_PATH = "C:\\Users\\Arthur\\Documents\\GitHub\\HA2_GameServer\\db\\test.db";
+    private static final String DB_PATH = "test.db";
 
 /////////////////////////////////////////////////////////////////////
 //        GLOBAL DATA                                              //

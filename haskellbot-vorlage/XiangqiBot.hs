@@ -22,7 +22,7 @@ getMove listMoves= "something"
 
 
 listMoves :: String -> String
-listMoves board = iterateString board 9 1 "" (blacksTurn board)
+listMoves board = (iterateString board 9 1 "" (blacksTurn board)) ++ (iterateString (reverse board) 9 1 "" (blacksTurn board))
 
 
 
@@ -56,12 +56,26 @@ iterateString board rowPos colPos allMoves blacksTurn
     |x == '9' = iterateString (tail board) rowPos (colPos + digitToInt '9') allMoves blacksTurn
     |(x == 'R') && not blacksTurn = iterateString (tail board) rowPos (colPos+1) (allMoves ++ redRook (tail board) "" rowPos (colPos+1) rowPos colPos) blacksTurn
     |(x == 'R') && blacksTurn = iterateString (tail board) rowPos (colPos+1) allMoves blacksTurn
+    |(x == 's') && blacksTurn = blackSoldier
+    |(x == 'S') && not blacksTurn = redSoldier
+    |(x == ' ') = allMoves
     where x = head board
     
 
 createMove :: Int -> Int -> Int -> Int -> String
 createMove rowCounter colCounter rowPos colPos = ',' : (convertColumnToChar colPos) : intToDigit rowPos : '-' : (convertColumnToChar colCounter) : (intToDigit rowCounter) : []
 
+blackSoldier :: String -> String -> Int -> Int -> Int -> Int -> String
+blackSoldier rest moves rowCounter colCounter rowPos colPos
+        |(rowCounter < 5) && (rowPos >=  )
+        |(rowCounter > 4) && (rowPos > )
+        |
+        |
+        |
+        |
+        |
+        |
+        |
 
   
 
