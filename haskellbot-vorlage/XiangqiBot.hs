@@ -18,7 +18,7 @@ import Util
 
 --- external signatures (NICHT ÄNDERN!)
 getMove :: String -> String
-getMove = "get"
+getMove listMoves= "something" 
 
 
 listMoves :: String -> String
@@ -38,6 +38,7 @@ convertColumnToChar columnPos = case columnPos of
     7 -> 'g'
     8 -> 'h'
     9 -> 'i'
+    
     
 
 blacksTurn :: String -> Bool 
@@ -67,43 +68,36 @@ createMove rowCounter colCounter rowPos colPos = ',' : (convertColumnToChar colP
 
 blackRook :: String -> String -> Int -> Int -> Int -> Int -> String
 blackRook rest moves rowCounter colCounter rowPos colPos
-    |(rowCounter/=rowPos) && (colCounter /= colPos) 
-    = blackRook y moves rowCounter (colCounter+1) rowPos colPos
-    |(rowCounter == rowPos) && ((x == 'R') || (x =='H') || (x == 'E') || (x == 'A') || (x == 'G') || (x == 'C') || (x == 'S'))
-    = blackRook (recurseToEnd y) (moves ++ (createMove rowCounter colCounter rowPos colPos)) rowCounter colCounter rowPos colPos
-    |(rowCounter == rowPos) && ((x == 'r') || (x =='h') || (x == 'e') || (x == 'a') || (x == 'g') || (x == 'c') || (x == 's'))
-    = blackRook (recurseToEnd y) moves rowCounter 0 rowPos colPos
-    |(rowCounter /= rowPos) && ((x == 'R') || (x =='H') || (x == 'E') || (x == 'A') || (x == 'G') || (x == 'C') || (x == 'S')) 
-    = moves ++ (createMove rowCounter colCounter rowPos colPos)
+    |(rowCounter/=rowPos) && (colCounter /= colPos) = blackRook y moves rowCounter (colCounter+1) rowPos colPos
+    |(rowCounter == rowPos) && ((x == 'R') || (x =='H') || (x == 'E') || (x == 'A') || (x == 'G') || (x == 'C') || (x == 'S')) = blackRook (recurseToEnd y) (moves ++ (createMove rowCounter colCounter rowPos colPos)) rowCounter colCounter rowPos colPos
+    |(rowCounter == rowPos) && ((x == 'r') || (x =='h') || (x == 'e') || (x == 'a') || (x == 'g') || (x == 'c') || (x == 's'))  = blackRook (recurseToEnd y) moves rowCounter 0 rowPos colPos
+    |(rowCounter /= rowPos) && ((x == 'R') || (x =='H') || (x == 'E') || (x == 'A') || (x == 'G') || (x == 'C') || (x == 'S')) = moves ++ (createMove rowCounter colCounter rowPos colPos) 
     |(x == '/') = redRook y moves (rowCounter-1) 0 rowPos colPos
     |(x == ' ') = moves
-    | otherwise = blackRook y (moves ++ numberRecurse "" (digitToInt x) 0 colCounter rowCounter colPos rowPos) rowCounter (colCounter + digitToInt x) rowPos colPos
+    |otherwise = blackRook y (moves ++ numberRecurse "" (digitToInt x) 0 colCounter rowCounter colPos rowPos) rowCounter (colCounter + digitToInt x) rowPos colPos
     where x = head rest
-    where y = tail rest    
+          y = tail rest
+       
 
 redRook :: String -> String -> Int -> Int -> Int -> Int -> String
 redRook rest moves rowCounter colCounter rowPos colPos
     
-    |(rowCounter/=rowPos) && (colCounter /= colPos) 
-    = redRook y moves rowCounter (colCounter+1) rowPos colPos
-    |(rowCounter == rowPos) && ((x == 'r') || (x =='h') || (x == 'e') || (x == 'a') || (x == 'g') || (x == 'c') || (x == 's'))
-    = redRook y (recurseToEnd y) (moves ++ (createMove rowCounter colCounter rowPos colPos))  rowCounter (colCounter+1) rowPos colPos
-    |(rowCounter == rowPos) && ((x == 'R') || (x =='H') || (x == 'E') || (x == 'A') || (x == 'G') || (x == 'C') || (x == 'S'))
-    = redRook (recurseToEnd y) moves rowCounter 0 rowPos colPos
-    |(rowCounter /= rowPos) && ((x == 'r') || (x =='h') || (x == 'e') || (x == 'a') || (x == 'g') || (x == 'c') || (x == 's')) 
-    = moves ++ (createMove rowCounter colCounter rowPos colPos)
+    |(rowCounter/=rowPos) && (colCounter /= colPos) = redRook y moves rowCounter (colCounter+1) rowPos colPos
+    |(rowCounter == rowPos) && ((x == 'r') || (x =='h') || (x == 'e') || (x == 'a') || (x == 'g') || (x == 'c') || (x == 's')) = redRook (recurseToEnd y) (moves ++ (createMove rowCounter colCounter rowPos colPos))  rowCounter (colCounter+1) rowPos colPos
+    |(rowCounter == rowPos) && ((x == 'R') || (x =='H') || (x == 'E') || (x == 'A') || (x == 'G') || (x == 'C') || (x == 'S')) = redRook (recurseToEnd y) moves rowCounter 0 rowPos colPos
+    |(rowCounter /= rowPos) && ((x == 'r') || (x =='h') || (x == 'e') || (x == 'a') || (x == 'g') || (x == 'c') || (x == 's')) = moves ++ (createMove rowCounter colCounter rowPos colPos)
     |(x == '/') = redRook y moves (rowCounter-1) 0 rowPos colPos
     |(x == ' ') = moves
     | otherwise = blackRook y (moves ++ numberRecurse "" (digitToInt x) 0 colCounter rowCounter colPos rowPos) rowCounter (colCounter + digitToInt x) rowPos colPos
     where x = head rest
-    where y = tail rest  
+          y = tail rest  
 
 
 numberRecurse ::String -> Int -> Int -> Int -> Int -> Int -> Int -> String 
 numberRecurse moves freeSpace iterationCounter colCounter rowCounter colPos rowPos = 
     if((iterationCounter+1) /= freeSpace)
         then
-         numberRecurse (moves ++ createMove rowCounter colCounter rowPos colPos) freeSpace (iterationCounter+1) (colCounter+1) rowCounter colPos rowPos)
+         numberRecurse (moves ++ createMove rowCounter colCounter rowPos colPos) freeSpace (iterationCounter+1) (colCounter+1) rowCounter colPos rowPos
         else moves
                                
 
