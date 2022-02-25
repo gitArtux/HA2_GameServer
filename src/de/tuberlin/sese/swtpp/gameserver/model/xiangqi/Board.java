@@ -38,7 +38,6 @@ public class Board implements Serializable{
 	public List<Figure> redFigsCheckable = new LinkedList<>();
 	public Figure blackGeneral;
 	public Figure redGeneral;
-	public int[][] positionsArray;
 	
 	public boolean deathstare() {
 		if (blackGeneral.getPosition()[1]==redGeneral.getPosition()[1]) {
@@ -179,7 +178,7 @@ public class Board implements Serializable{
 		}
 		
 		if(backUpFig != null) { // Muss leider diese Methoden 2x mit "!=null"-ifs checken
-			backUpFig.removeFromCheckable();
+			backUpFig.removeFromList();
 		}
 			
 		f.setPosition(a);
