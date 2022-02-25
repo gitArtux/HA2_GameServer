@@ -106,7 +106,6 @@ public class Board implements Serializable{
 			c = Character.toUpperCase(c);
 			color = true;
 		}
-		System.out.println(c);
 		switch(c) {
 		case 'S':
 			return new Soldier(pos, color, repr, this);

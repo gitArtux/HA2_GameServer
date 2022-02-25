@@ -30,7 +30,6 @@ public class Advisor extends Figure implements Serializable {
 		(Math.abs(square[0]-getPosition()[0])==1 && Math.abs(square[1]-getPosition()[1])==1)) {
 			return true;
 		}
-		System.out.println("Advisor false");
 		return false;
 	}
 }
